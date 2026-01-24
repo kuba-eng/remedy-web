@@ -242,7 +242,7 @@ export function StickMan() {
                     </g>
 
                     <path d={`M ${hip.x} ${hip.y} Q ${hip.x - hunch * 0.3} ${hip.y - 30} ${neck.x} ${neck.y}`} stroke={color} strokeWidth="5" />
-                    <circle cx={head.x} cy={head.y} r="9" stroke={color} strokeWidth="3" fill="#000" />
+                    <circle cx={head.x} cy={head.y} r="9" stroke={color} strokeWidth="3" fill="none" />
 
                     <g stroke={color} strokeWidth="4">
                         <path d={`M ${neck.x} ${neck.y + 5} L ${elbowL.x} ${elbowL.y} L ${handL.x} ${handL.y}`} />
