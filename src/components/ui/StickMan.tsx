@@ -223,30 +223,74 @@ export function StickMan() {
     const colorB = Math.floor(68 * crutchW + 157 * runW);
     const color = `rgb(${colorR}, ${colorG}, ${colorB})`;
 
+    // Vertikální "houpání" těžiště (bounce) - 2x za cyklus
+    const bounce = Math.abs(Math.sin(phase)) * 8;
+
+    // Aplikace houpání na tělo
+    const currentHipBy = hip.y - bounce;
+    const currentNeckBy = neck.y - bounce;
+    const currentHeadBy = head.y - bounce;
+
+    // Update IK targets pro ruce (aby se hýbaly s tělem)
+    // Ruce se hýbou s tělem, takže jejich targety (handR, handL) by měly být relativní k *novému* rameni?
+    // Hand targety jsou počítány jako swing, ten je relativní k tělu nebo globální?
+
+    // Konstanty pro IK
+
+    const realNeck = { x: neck.x, y: currentNeckBy };
+    const realHip = { x: hip.x, y: currentHipBy };
+
+    // Lokty - ruce se houpou s tělem, to je ok.
+    // Target pro ruku musíme taky posunout o bounce, aby se ruka "netahala" dolů.
+    const realHandR = { x: handR.x, y: handR.y - bounce };
+    const realHandL = { x: handL.x, y: handL.y - bounce };
+
+    const realElbowR = solveIK(realNeck, realHandR, ARM, ARM, true);
+    const realElbowL = solveIK(realNeck, realHandL, ARM, ARM, false);
+
+    // Kolena - chodidla (footR, footL) zůstávají na zemi (původní Y + offsety).
+    // Foot pozice v SVG je: L ${hip.x + footR.x} ${hip.y + footR.y}
+    // Původní 'hip.y' je "baseline". 'currentHipBy' je houpnuté.
+    // Chodidlo musí zůstat na 'hip.y + footR.y' (protože footR.y je 0 nebo malý zdvih).
+    const footTargetR = { x: hip.x + footR.x, y: hip.y + footR.y };
+    const footTargetL = { x: hip.x + footL.x, y: hip.y + footL.y };
+
+    const realKneeR = solveIK(realHip, footTargetR, LEG_U, LEG_L, false);
+    const realKneeL = solveIK(realHip, footTargetL, LEG_U, LEG_L, true);
+
+
+    // Vykreslení
     return (
         <div
-            className="fixed bottom-0 z-50 pointer-events-none"
+            className="fixed bottom-0 pointer-events-none z-40 transition-opacity duration-500"
             style={{
                 left: xPos,
-                width: '100px',
-                height: '130px',
-                transform: 'scaleX(-1)' // Walking "Left"
+                width: '120px',
+                height: '160px',
+                transform: 'translateX(-50%) scaleX(-1)', // Centrování a Walking "Left"
+                opacity: isStickManActive ? 1 : 0
             }}
         >
             <svg width="100%" height="100%" viewBox="-60 -120 120 160" overflow="visible">
+                {/* Stín */}
+                <ellipse cx={realHip.x} cy={hip.y + 85} rx={15 + (1 - Math.abs(Math.sin(phase))) * 5} ry={4} fill="#000" opacity="0.2" />
+
                 <g strokeLinecap="round" strokeLinejoin="round" fill="none">
+                    {/* Zadní končetiny - tenčí, aby to vypadalo plasticky */}
                     <g stroke={color} strokeWidth="2.5" opacity="0.6">
-                        <path d={`M ${neck.x} ${neck.y + 5} L ${elbowR.x} ${elbowR.y} L ${handR.x} ${handR.y}`} />
+                        <path d={`M ${realNeck.x} ${realNeck.y + 5} L ${realElbowR.x} ${realElbowR.y} L ${realHandR.x} ${realHandR.y}`} />
                         {crutch}
-                        <path d={`M ${hip.x} ${hip.y} L ${kneeR.x} ${kneeR.y} L ${hip.x + footR.x} ${hip.y + footR.y}`} />
+                        <path d={`M ${realHip.x} ${realHip.y} L ${realKneeR.x} ${realKneeR.y} L ${footTargetR.x} ${footTargetR.y}`} />
                     </g>
 
-                    <path d={`M ${hip.x} ${hip.y} Q ${hip.x - hunch * 0.3} ${hip.y - 30} ${neck.x} ${neck.y}`} stroke={color} strokeWidth="5" />
-                    <circle cx={head.x} cy={head.y} r="9" stroke={color} strokeWidth="3" fill="none" />
+                    {/* Tělo a Hlava */}
+                    <path d={`M ${realHip.x} ${realHip.y} Q ${realHip.x - hunch * 0.3} ${realHip.y - 30} ${realNeck.x} ${realNeck.y}`} stroke={color} strokeWidth="5" />
+                    <circle cx={realNeck.x} cy={currentHeadBy} r="9" stroke={color} strokeWidth="3" fill="none" />
 
+                    {/* Přední končetiny - silnější */}
                     <g stroke={color} strokeWidth="4">
-                        <path d={`M ${neck.x} ${neck.y + 5} L ${elbowL.x} ${elbowL.y} L ${handL.x} ${handL.y}`} />
-                        <path d={`M ${hip.x} ${hip.y} L ${kneeL.x} ${kneeL.y} L ${hip.x + footL.x} ${hip.y + footL.y}`} />
+                        <path d={`M ${realNeck.x} ${realNeck.y + 5} L ${realElbowL.x} ${realElbowL.y} L ${realHandL.x} ${realHandL.y}`} />
+                        <path d={`M ${realHip.x} ${realHip.y} L ${realKneeL.x} ${realKneeL.y} L ${footTargetL.x} ${footTargetL.y}`} />
                     </g>
                 </g>
             </svg>
