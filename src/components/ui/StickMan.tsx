@@ -234,14 +234,14 @@ export function StickMan() {
             }}
         >
             <svg width="100%" height="100%" viewBox="-60 -120 120 160" overflow="visible">
-                <g strokeLinecap="round" strokeLinejoin="round">
+                <g strokeLinecap="round" strokeLinejoin="round" fill="none">
                     <g stroke={color} strokeWidth="2.5" opacity="0.6">
                         <path d={`M ${neck.x} ${neck.y + 5} L ${elbowR.x} ${elbowR.y} L ${handR.x} ${handR.y}`} />
                         {crutch}
                         <path d={`M ${hip.x} ${hip.y} L ${kneeR.x} ${kneeR.y} L ${hip.x + footR.x} ${hip.y + footR.y}`} />
                     </g>
 
-                    <path d={`M ${hip.x} ${hip.y} Q ${hip.x - hunch * 0.3} ${hip.y - 30} ${neck.x} ${neck.y}`} stroke={color} strokeWidth="5" fill="none" />
+                    <path d={`M ${hip.x} ${hip.y} Q ${hip.x - hunch * 0.3} ${hip.y - 30} ${neck.x} ${neck.y}`} stroke={color} strokeWidth="5" />
                     <circle cx={head.x} cy={head.y} r="9" stroke={color} strokeWidth="3" fill="#000" />
 
                     <g stroke={color} strokeWidth="4">
