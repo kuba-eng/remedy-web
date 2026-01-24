@@ -246,7 +246,7 @@ export function StickMan() {
     const realHandL = { x: handL.x, y: handL.y - bounce };
 
     const realElbowR = solveIK(realNeck, realHandR, ARM, ARM, true);
-    const realElbowL = solveIK(realNeck, realHandL, ARM, ARM, false);
+    const realElbowL = solveIK(realNeck, realHandL, ARM, ARM, true);
 
     // Kolena - chodidla (footR, footL) zůstávají na zemi (původní Y + offsety).
     // Foot pozice v SVG je: L ${hip.x + footR.x} ${hip.y + footR.y}
@@ -256,7 +256,7 @@ export function StickMan() {
     const footTargetL = { x: hip.x + footL.x, y: hip.y + footL.y };
 
     const realKneeR = solveIK(realHip, footTargetR, LEG_U, LEG_L, false);
-    const realKneeL = solveIK(realHip, footTargetL, LEG_U, LEG_L, true);
+    const realKneeL = solveIK(realHip, footTargetL, LEG_U, LEG_L, false);
 
 
     // Vykreslení
@@ -272,12 +272,9 @@ export function StickMan() {
             }}
         >
             <svg width="100%" height="100%" viewBox="-60 -120 120 160" overflow="visible">
-                {/* Stín */}
-                <ellipse cx={realHip.x} cy={hip.y + 85} rx={15 + (1 - Math.abs(Math.sin(phase))) * 5} ry={4} fill="#000" opacity="0.2" />
-
                 <g strokeLinecap="round" strokeLinejoin="round" fill="none">
-                    {/* Zadní končetiny - tenčí, aby to vypadalo plasticky */}
-                    <g stroke={color} strokeWidth="2.5" opacity="0.6">
+                    {/* Zadní končetiny - tenčí pro hloubku */}
+                    <g stroke={color} strokeWidth="2" opacity="0.5">
                         <path d={`M ${realNeck.x} ${realNeck.y + 5} L ${realElbowR.x} ${realElbowR.y} L ${realHandR.x} ${realHandR.y}`} />
                         {crutch}
                         <path d={`M ${realHip.x} ${realHip.y} L ${realKneeR.x} ${realKneeR.y} L ${footTargetR.x} ${footTargetR.y}`} />
@@ -287,8 +284,8 @@ export function StickMan() {
                     <path d={`M ${realHip.x} ${realHip.y} Q ${realHip.x - hunch * 0.3} ${realHip.y - 30} ${realNeck.x} ${realNeck.y}`} stroke={color} strokeWidth="5" />
                     <circle cx={realNeck.x} cy={currentHeadBy} r="9" stroke={color} strokeWidth="3" fill="none" />
 
-                    {/* Přední končetiny - silnější */}
-                    <g stroke={color} strokeWidth="4">
+                    {/* Přední končetiny - silnější pro hloubku */}
+                    <g stroke={color} strokeWidth="5">
                         <path d={`M ${realNeck.x} ${realNeck.y + 5} L ${realElbowL.x} ${realElbowL.y} L ${realHandL.x} ${realHandL.y}`} />
                         <path d={`M ${realHip.x} ${realHip.y} L ${realKneeL.x} ${realKneeL.y} L ${footTargetL.x} ${footTargetL.y}`} />
                     </g>
