@@ -265,8 +265,8 @@ export function StickMan() {
             className="fixed bottom-0 pointer-events-none z-40 transition-opacity duration-500"
             style={{
                 left: xPos,
-                width: '120px',
-                height: '160px',
+                width: '100px', // Zmenšeno z 120px
+                height: '130px', // Zmenšeno z 160px
                 transform: 'translateX(-50%) scaleX(-1)', // Centrování a Walking "Left"
                 opacity: isStickManActive ? 1 : 0
             }}
@@ -274,7 +274,7 @@ export function StickMan() {
             <svg width="100%" height="100%" viewBox="-60 -120 120 160" overflow="visible">
                 <g strokeLinecap="round" strokeLinejoin="round" fill="none">
                     {/* Zadní končetiny - tenčí pro hloubku */}
-                    <g stroke={color} strokeWidth="2" opacity="0.5">
+                    <g stroke={color} strokeWidth="1.5" opacity="0.4">
                         <path d={`M ${realNeck.x} ${realNeck.y + 5} L ${realElbowR.x} ${realElbowR.y} L ${realHandR.x} ${realHandR.y}`} />
                         {crutch}
                         <path d={`M ${realHip.x} ${realHip.y} L ${realKneeR.x} ${realKneeR.y} L ${footTargetR.x} ${footTargetR.y}`} />
@@ -285,7 +285,7 @@ export function StickMan() {
                     <circle cx={realNeck.x} cy={currentHeadBy} r="9" stroke={color} strokeWidth="3" fill="none" />
 
                     {/* Přední končetiny - silnější pro hloubku */}
-                    <g stroke={color} strokeWidth="5">
+                    <g stroke={color} strokeWidth="6">
                         <path d={`M ${realNeck.x} ${realNeck.y + 5} L ${realElbowL.x} ${realElbowL.y} L ${realHandL.x} ${realHandL.y}`} />
                         <path d={`M ${realHip.x} ${realHip.y} L ${realKneeL.x} ${realKneeL.y} L ${footTargetL.x} ${footTargetL.y}`} />
                     </g>
