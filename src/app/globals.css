@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+:root {
+  /* REMEDY - Premium Minimalist Palette */
+  --primary: #FDFCF8;
+  /* Off-white for text on dark bg */
+  --primary-foreground: #1C1917;
+  /* Charcoal */
+
+  --secondary: #1C1917;
+  /* Dark background */
+  --secondary-foreground: #FDFCF8;
+
+  --accent: #D4B483;
+  /* Muted Gold */
+  --accent-foreground: #1C1917;
+
+  --muted: #FAFAF9;
+  /* Warm Gray/Stone 50 */
+  --muted-foreground: #A8A29E;
+  /* Stone 400 */
+
+  --background: #1C1917;
+  /* Dark base */
+  --foreground: #FDFCF8;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  /* New Fonts */
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-sora);
+}
+
+/* Base Styles */
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display), sans-serif;
+}
