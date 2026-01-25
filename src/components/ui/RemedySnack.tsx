@@ -19,6 +19,72 @@ export function RemedySnack() {
     const [email, setEmail] = useState("");
     const [emailSent, setEmailSent] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const GENERAL_TAGS = ["krk", "bedra", "rameno", "stres"];
+
+    // --- HELPER: SELECT TAGS TO DISPLAY ---
+    const getDisplayTags = (tip: Tip): string[] => {
+        if (!tip.tags || tip.tags.length === 0) return [];
+        const specific = tip.tags.filter(t => !GENERAL_TAGS.includes(t));
+
+        if (specific.length >= 2) return specific.slice(0, 2);
+        if (specific.length === 1) {
+            const general = tip.tags.find(t => GENERAL_TAGS.includes(t));
+            return general ? [specific[0], general] : [specific[0]];
+        }
+        return tip.tags.slice(0, 2);
+    };
+
+    const showSmartTip = (type: 'SIMILAR' | 'TAG', tag?: string) => {
+        if (!currentTip) return;
+        const cat = currentTip.category;
+
+        // 1. Get history to avoid immediate repetition of the EXACT SAME tip
+        const lastTipIdKey = `remedy_last_tip_${cat}`;
+        const lastTipId = localStorage.getItem(lastTipIdKey);
+
+        const categoryTips = REMEDY_TIPS.filter(t => t.category === cat && t.id !== currentTip.id && t.id !== lastTipId);
+
+        let candidates: Tip[] = [];
+
+        if (type === 'TAG' && tag) {
+            candidates = categoryTips.filter(t => t.tags?.includes(tag));
+        } else {
+            // SIMILAR: Score by overlap
+            const currentTags = currentTip.tags || [];
+            if (currentTags.length === 0) {
+                // No tags? Fallback to normal random
+                showTip(cat);
+                return;
+            }
+
+            // Calculate scores
+            const scored = categoryTips.map(t => {
+                const intersection = t.tags?.filter(x => currentTags.includes(x)).length || 0;
+                return { tip: t, score: intersection };
+            });
+
+            const maxScore = Math.max(...scored.map(s => s.score));
+            if (maxScore > 0) {
+                candidates = scored.filter(s => s.score === maxScore).map(s => s.tip);
+            }
+        }
+
+        // Fallback if no smart match found
+        if (candidates.length === 0) {
+            showTip(cat);
+            return;
+        }
+
+        // Select random from candidates
+        const selectedTip = candidates[Math.floor(Math.random() * candidates.length)];
+
+        // Save state & Show
+        if (selectedTip) {
+            localStorage.setItem(lastTipIdKey, selectedTip.id);
+            localStorage.setItem(`remedy_last_type_${cat}`, selectedTip.type);
+            setCurrentTip(selectedTip);
+        }
+    };
 
     // --- FAVORITES LOGIC ---
     interface FavoriteItem {
@@ -26,6 +92,7 @@ export function RemedySnack() {
         category: string;
         type: string;
         headline: string;
+        tags?: string[];
         ts: number;
     }
 
@@ -58,6 +125,7 @@ export function RemedySnack() {
                 category: currentTip.category,
                 type: currentTip.type,
                 headline: currentTip.headline,
+                tags: currentTip.tags,
                 ts: Date.now()
             };
             // Add to start, keep max 30
@@ -327,9 +395,24 @@ export function RemedySnack() {
                                             <div className="flex items-baseline justify-between mb-2">
                                                 <h4 className="text-white font-bold text-lg leading-tight">{currentTip.headline}</h4>
                                             </div>
-                                            <p className="text-stone-300 text-sm leading-relaxed mb-4">
+                                            <p className="text-stone-300 text-sm leading-relaxed mb-3">
                                                 {currentTip.body}
                                             </p>
+
+                                            {/* TAGS CHIPS */}
+                                            {currentTip.tags && currentTip.tags.length > 0 && (
+                                                <div className="flex flex-wrap gap-2 mb-4">
+                                                    {getDisplayTags(currentTip).map(tag => (
+                                                        <button
+                                                            key={tag}
+                                                            onClick={() => showSmartTip('TAG', tag)}
+                                                            className="px-2 py-0.5 rounded-md border border-white/10 bg-white/5 text-[10px] text-stone-400 hover:text-[#D9F99D] hover:border-[#D9F99D]/30 transition-colors uppercase tracking-wide"
+                                                        >
+                                                            {tag.replace('_', ' ')}
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            )}
 
                                             {/* MICRO TIP BLOCK */}
                                             <div className="bg-[#D9F99D]/10 border border-[#D9F99D]/20 rounded-xl p-3 relative">
@@ -347,8 +430,8 @@ export function RemedySnack() {
                                                 <button
                                                     onClick={toggleFavorite}
                                                     className={`text-xs flex items-center gap-1.5 px-2 py-1 rounded transition-colors ${isCurrentFavorite
-                                                            ? "text-[#D9F99D] bg-[#D9F99D]/10 border border-[#D9F99D]/20"
-                                                            : "text-stone-400 hover:text-white hover:bg-white/5"
+                                                        ? "text-[#D9F99D] bg-[#D9F99D]/10 border border-[#D9F99D]/20"
+                                                        : "text-stone-400 hover:text-white hover:bg-white/5"
                                                         }`}
                                                     aria-label={isCurrentFavorite ? "Odebrat z oblíbených" : "Přidat do oblíbených"}
                                                     aria-pressed={isCurrentFavorite}
@@ -370,6 +453,14 @@ export function RemedySnack() {
                                         </div>
 
                                         <div className="pt-2 flex flex-col gap-2 border-t border-white/5">
+                                            {/* SMART NEXT BUTTON */}
+                                            <button
+                                                onClick={() => showSmartTip('SIMILAR')}
+                                                className="w-full py-2 rounded-lg bg-gradient-to-r from-white/5 to-white/10 hover:from-white/10 hover:to-white/20 border border-white/10 text-xs font-medium text-stone-200 flex items-center justify-center gap-2 transition-all group"
+                                            >
+                                                <span>⚡️</span> Další tip jako tenhle
+                                            </button>
+
                                             <a
                                                 href={RESERVATION_URL}
                                                 target="_blank"
