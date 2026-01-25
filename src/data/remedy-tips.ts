@@ -8,103 +8,119 @@ export interface Tip {
     duration: string;
 }
 
-export const REMEDY_TIPS: Tip[] = [
-    // KRK / HLAVA
-    {
-        id: 'krk-1',
-        category: 'krk',
-        headline: 'Zasuň bradu, vytáhni temeno',
-        description: 'Představ si, že tě někdo táhne za temeno hlavy vzhůru. Bradu lehce zasuň dozadu (udělej "dvojitou bradu"). Uvolni čelisti.',
-        duration: '20 s'
-    },
-    {
-        id: 'krk-2',
-        category: 'krk',
-        headline: 'Uvolnění šíje',
-        description: 'Chyť se jednou rukou za židli a ukloň hlavu na opačnou stranu. Rameno nech klesnout dolů. Prodýchej napětí.',
-        duration: '30 s'
-    },
-    {
-        id: 'krk-3',
-        category: 'krk',
-        headline: 'Kroužky nosem',
-        description: 'Představ si, že máš na nose tužku. Kresli s ní ve vzduchu malé ležaté osmičky. Uvolníš tím hluboké svaly pod lebkou.',
-        duration: '30 s'
-    },
-
-    // BEDRA
-    {
-        id: 'bedra-1',
-        category: 'bedra',
-        headline: 'Prodýchnutí do břicha',
-        description: 'Polož si ruce na spodní břicho. S nádechem pošli vzduch až do dlaní (ne do hrudníku). S výdechem uvolni.',
-        duration: '40 s'
-    },
-    {
-        id: 'bedra-2',
-        category: 'bedra',
-        headline: 'Kočičí hřbet v sedě',
-        description: 'Opři se rukama o kolena. S výdechem vykul záda dozadu, s nádechem se prohni a otevři hrudník dopředu.',
-        duration: '30 s'
-    },
-    {
-        id: 'bedra-3',
-        category: 'bedra',
-        headline: 'Aktivní sed',
-        description: 'Posuň se na židli dopředu, ať se neopíráš. Nohy dej na šířku pánve celou plochou na zem. Vytáhni se z pasu nahoru.',
-        duration: 'Trvale'
-    },
-
-    // RAMENO / LOPATKY
-    {
-        id: 'rameno-1',
-        category: 'rameno',
-        headline: 'Otevři hrudník',
-        description: 'Spoj ruce za zády, propleť prsty a lehce je stáhni dolů k zemi. Ramena jdou od uší, hrudník se otevírá.',
-        duration: '20 s'
-    },
-    {
-        id: 'rameno-2',
-        category: 'rameno',
-        headline: 'Lopatky k sobě',
-        description: 'S výdechem stáhni lopatky k sobě a dolů (jako bys mezi nimi chtěl/a udržet tužku). S nádechem povol.',
-        duration: '10x'
-    },
-    {
-        id: 'rameno-3',
-        category: 'rameno',
-        headline: 'Kroužení rameny',
-        description: 'Dělej velké, pomalé kruhy rameny dozadu. Soustřeď se na pohyb lopatek po žebrech. Dopředu ne, tam jsou už celý den.',
-        duration: '30 s'
-    },
-
-    // STRES / ÚNAVA
-    {
-        id: 'stres-1',
-        category: 'stres',
-        headline: 'Boxový dech',
-        description: 'Nádech na 4 doby, zádrž na 4, výdech na 4, zádrž na 4. Opakuj 4x. Okamžitý reset pro nervový systém.',
-        duration: '1 min'
-    },
-    {
-        id: 'stres-2',
-        category: 'stres',
-        headline: 'Pohled do dálky',
-        description: 'Zvedni oči od monitoru. Zadívej se z okna na nejvzdálenější bod, který vidíš. Uvolníš tím oční svaly i mozek.',
-        duration: '20 s'
-    },
-    {
-        id: 'stres-3',
-        category: 'stres',
-        headline: 'Proklepání',
-        description: 'Vstaň a rychle proklepej ruce, nohy i celé tělo. Setřes ze sebe napětí jako pes vodu. Energie se okamžitě vrátí.',
-        duration: '15 s'
-    }
-];
-
 export const CATEGORIES: { id: TipCategory; label: string }[] = [
     { id: 'krk', label: 'Krk / Hlava' },
     { id: 'bedra', label: 'Bedra' },
     { id: 'rameno', label: 'Ramena / Lopatky' },
     { id: 'stres', label: 'Stres / Únava' }
+];
+
+export const REMEDY_TIPS: Tip[] = [
+    // --- KRK / HLAVA (25 tips) ---
+    { id: 'k-1', category: 'krk', headline: 'Zasuň bradu', description: 'Udělej "dvojitou bradu" – zasuň ji dozadu, jako bys tlačil/a zásuvku. Vytáhni se za temenem.', duration: '15s' },
+    { id: 'k-2', category: 'krk', headline: 'Úklon ke straně', description: 'Ukloň hlavu k pravému rameni, levé rameno tlač aktivně dolů. Prodýchej tah, ne bolest.', duration: '20s / str' },
+    { id: 'k-3', category: 'krk', headline: 'Půlkruhy vpřed', description: 'Pomalu kruž bradou od jednoho ramene k druhému přes hrudník. Nezakláněj hlavu dozadu.', duration: '30s' },
+    { id: 'k-4', category: 'krk', headline: 'Nos jako tužka', description: 'Představ si tužku na špičce nosu a kresli s ní před sebou malé ležaté osmičky.', duration: '30s' },
+    { id: 'k-5', category: 'krk', headline: 'Tlak do dlaně (čelo)', description: 'Polož dlaň na čelo. Tlač čelem do dlaně a dlaní do čela, aniž by se hlava pohnula.', duration: '10s' },
+    { id: 'k-6', category: 'krk', headline: 'Tlak do dlaně (spánek)', description: 'Polož dlaň na spánek. Zatlač hlavou proti ruce, ruka klade odpor. Pohyb je nulový.', duration: '10s / str' },
+    { id: 'k-7', category: 'krk', headline: 'Hledění přes rameno', description: 'Otoč hlavu co nejvíc doprava, podívej se očima až "za ucho". Prodýchej a vyměň.', duration: '15s / str' },
+    { id: 'k-8', category: 'krk', headline: 'Uvolnění čelisti', description: 'Otevři ústa, jako bys zíval/a, a jemně promasíruj žvýkací svaly pod lícními kostmi.', duration: '20s' },
+    { id: 'k-9', category: 'krk', headline: 'Vyvěšení hlavy', description: 'Propleť prsty, dej je v týl a nech váhu paží (netlač!), ať jemně protáhrne šíji.', duration: '20s' },
+    { id: 'k-10', category: 'krk', headline: 'Zvednutí ramen (NE)', description: 'Uvědom si, kde máš ramena. Jsou u uší? S výdechem je pošli vědomě dolů k zemi.', duration: 'Ihned' },
+    { id: 'k-11', category: 'krk', headline: 'Diagonální tah', description: 'Dívej se do podpaží. Ruku polož na temeno a lehce pomož hlavě do předklonu šikmo.', duration: '15s / str' },
+    { id: 'k-12', category: 'krk', headline: 'Předsunutí hlavy', description: 'Vypadáš jako želva? Zatáhni hlavu zpátky nad hrudník. Uši by měly být nad rameny.', duration: 'Trvale' },
+    { id: 'k-13', category: 'krk', headline: 'Masáž úponů', description: 'Palci nahmatej dolíčky tam, kde končí lebka a začíná krk. Krouživým pohybem masíruj.', duration: '30s' },
+    { id: 'k-14', category: 'krk', headline: 'Změna ohniska', description: 'Bolest hlavy může být z očí. Přeostři na 20 vteřin na něco vzdáleného 6 metrů.', duration: '20s' },
+    { id: 'k-15', category: 'krk', headline: 'Protažení s židlí', description: 'Chyť se pravou rukou židle zespodu, ukloň hlavu doleva. Ruka fixuje rameno dole.', duration: '20s' },
+    { id: 'k-16', category: 'krk', headline: 'Kývání ANO', description: 'Dělej malé, rychlé kývavé pohyby "ano-ano-ano". Uvolňuješ tím drobné svaly atlasu.', duration: '15s' },
+    { id: 'k-17', category: 'krk', headline: 'Kývání NE', description: 'Dělej malé, rychlé pohyby "ne-ne-ne". Rozsah jen pár centimetrů, uvolněně.', duration: '15s' },
+    { id: 'k-18', category: 'krk', headline: 'Suché polknutí', description: 'Narovnej se, zasuň bradu a vědomě polkni. Cítíš, jak se protáhla přední strana?', duration: '5s' },
+    { id: 'k-19', category: 'krk', headline: 'Platysma stretch', description: 'Dej dlaně na klíční kosti, stáhni kůži dolů a zakloň hlavu. Ústa měj zavřená.', duration: '15s' },
+    { id: 'k-20', category: 'krk', headline: 'Monitor check', description: 'Je horní hrana monitoru v úrovni očí? Pokud ne, podlož ho nebo sniž židli.', duration: 'Jednou' },
+    { id: 'k-21', category: 'krk', headline: 'Mobil v metru', description: 'Koukáš do mobilu dolů? Zvedni ruku s telefonem výš, ať se krk tolik neláme.', duration: 'Vždy' },
+    { id: 'k-22', category: 'krk', headline: 'Ucho k rameni (aktivní)', description: 'S nádechem zvedni rameno k uchu, s výdechem ho pošli prudce dolů.', duration: '5x' },
+    { id: 'k-23', category: 'krk', headline: 'Zásuvka s oporou', description: 'Opři se týlem o zeď (nebo opěrku). Zatlač hlavou dozadu do opory a povol.', duration: '10x' },
+    { id: 'k-24', category: 'krk', headline: 'Kroužky rameny', description: 'Někdy bolest krku vychází ze ztuhlých trapézů. Zakruž rameny vzad.', duration: '10x' },
+    { id: 'k-25', category: 'krk', headline: 'Teplo', description: 'Máš krk ztuhlý z průvanu? Zabal ho do šály nebo použij suché teplo (nahřátý polštářek).', duration: 'Večer' },
+
+    // --- BEDRA (25 tips) ---
+    { id: 'b-1', category: 'bedra', headline: 'Nádech do beder', description: 'Sedni si, dej ruce v bok nad pánev. Zkus se nadechnout tak, aby se palce na zádech oddálily.', duration: '10 dechů' },
+    { id: 'b-2', category: 'bedra', headline: 'Podsazení pánve', description: 'V sedě stáhni zadek a podsad pánev (kulatá bedra), pak se prohni (kachní zadek).', duration: '10x' },
+    { id: 'b-3', category: 'bedra', headline: 'Rotace v sedě', description: 'Pravou rukou se chytni levého kolene, levou opěradla a otoč se za levým ramenem.', duration: '15s / str' },
+    { id: 'b-4', category: 'bedra', headline: 'Předklon ke kolenům', description: 'Rozkroč nohy, uvolni trup a vyvěsit se mezi kolena směrem k zemi. Hlava visí.', duration: '30s' },
+    { id: 'b-5', category: 'bedra', headline: 'Aktivní sed', description: 'Sedni si jen na kraj židle. Nohy pevně na zem. Trup drž vzpřímený jen svaly, bez opory.', duration: '5 min' },
+    { id: 'b-6', category: 'bedra', headline: 'Kyčelní flexor', description: 'Vstaň, udělej krok vzad (výpad). Podsad pánev. Cítíš tah na přední straně zadního stehna?', duration: '20s' },
+    { id: 'b-7', category: 'bedra', headline: 'Hruškový sval', description: 'V sedě dej kotník pravé nohy na levé koleno. S rovnými zády se mírně předklon.', duration: '20s / str' },
+    { id: 'b-8', category: 'bedra', headline: 'Stoj na jedné noze', description: 'Při čištění zubů nebo čekání na kávu stůj na jedné noze. Aktivuješ hluboký stabilizační systém.', duration: '30s' },
+    { id: 'b-9', category: 'bedra', headline: 'Boční úklon', description: 'V sedě zvedni pravou ruku a ukloň se doleva. Vytahuj se za rukou do dálky, ne jen dolů.', duration: '15s / str' },
+    { id: 'b-10', category: 'bedra', headline: 'Vstaň a jdi', description: 'Sezení je nová rakovina. Vstaň a projdi se ke kopírce, pro vodu nebo k oknu.', duration: '2 min' },
+    { id: 'b-11', category: 'bedra', headline: 'Zatni hýždě', description: 'V sedě nebo ve stoji silně stiskni půlky k sobě. Drž 5 vteřin, povol.', duration: '10x' },
+    { id: 'b-12', category: 'bedra', headline: 'Pumpování kotníky', description: 'Zvedej střídavě špičky a paty. Rozproudíš krev z nohou a ulevíš bedrům od žilního městnání.', duration: '30s' },
+    { id: 'b-13', category: 'bedra', headline: 'Kočka o stůl', description: 'Postav se, opři dlaně o stůl, odstup dozadu. Vytvoř s tělem pravý úhel a protlač hrudník dolů.', duration: '20s' },
+    { id: 'b-14', category: 'bedra', headline: 'Vysoké koleno', description: 'Ve stoji přitáhni jedno koleno k hrudníku. Drž rovná záda, nezakláněj se.', duration: '10s / str' },
+    { id: 'b-15', category: 'bedra', headline: 'Mikropohyb', description: 'Dlouhé statické sezení bolí. Každých 10 minut se na židli trochu zavrť, změň polohu.', duration: 'Trvale' },
+    { id: 'b-16', category: 'bedra', headline: 'Bederní válec', description: 'Nemáš ergonomickou židli? Sroluj ručník nebo mikinu a dej si ji za bedra jako oporu.', duration: 'Trvale' },
+    { id: 'b-17', category: 'bedra', headline: 'Prodýchání žeber', description: 'Objmi se rukama kolem žeber. Dýchej tak, abys rukama cítil/a, jak se hrudník roztahuje do stran.', duration: '10 dechů' },
+    { id: 'b-18', category: 'bedra', headline: 'Přilepená páteř', description: 'Pokud máš možnost si lehnout (home office): lehni si na záda, pokrč nohy a přitiskni bedra k zemi.', duration: '1 min' },
+    { id: 'b-19', category: 'bedra', headline: 'Pozice dítěte', description: 'Máš-li soukromí: klekni si, sedni na paty a natáhni ruce dopředu po podlaze.', duration: '30s' },
+    { id: 'b-20', category: 'bedra', headline: 'Zvedání ze židle', description: 'Vstaň ze židle bez pomoci rukou. A sedni si zpátky, pomalu. Opakuj.', duration: '5x' },
+    { id: 'b-21', category: 'bedra', headline: 'Kolena od sebe', description: 'V sedě tlač kolena od sebe proti odporu vlastních rukou (nebo gumy). Aktivuje hýždě.', duration: '10x' },
+    { id: 'b-22', category: 'bedra', headline: 'Povolené břicho?', description: 'Nesedíš tam "vykydlý/á"? Jemně vtáhni pupík k páteři (jen asi na 30 %), aktivuj core.', duration: 'Trvale' },
+    { id: 'b-23', category: 'bedra', headline: 'Nohy na zemi', description: 'Máš obě nohy na zemi? Křížení nohou (noha přes nohu) křiví pánev a blokuje bedra.', duration: 'Kontrola' },
+    { id: 'b-24', category: 'bedra', headline: 'Zadní strana stehen', description: 'Polož patu jedné nohy na židli (stojíš). S rovnými zády se předkláněj k noze.', duration: '15s / str' },
+    { id: 'b-25', category: 'bedra', headline: 'Hydratace', description: 'Meziobratlové ploténky potřebují vodu. Napij se, jinak "vysychají" a bolí.', duration: 'Ihned' },
+
+    // --- RAMENA / LOPATKY (25 tips) ---
+    { id: 'r-1', category: 'rameno', headline: 'Kroužení vzad', description: 'Velké kruhy rameny dozadu. Cítíš, jak se lopatky hýbou po žebrech?', duration: '30s' },
+    { id: 'r-2', category: 'rameno', headline: 'Spojené ruce', description: 'Propleť prsty za zády, propni lokty a zkus ruce oddálit od zad. Otevři hrudník.', duration: '20s' },
+    { id: 'r-3', category: 'rameno', headline: 'Orel (poloviční)', description: 'Předpaž pravou, levou dej pod ni a zkus spojit dlaně (nebo hřbety). Lokty zvedni výš.', duration: '15s / str' },
+    { id: 'r-4', category: 'rameno', headline: 'W pozice', description: 'Dej paže do tvaru W (lokty u těla, dlaně ven). Tlač palce dozadu za sebe.', duration: '15s' },
+    { id: 'r-5', category: 'rameno', headline: 'Anděl u zdi', description: 'Postav se zády ke zdi. Přitiskni zadek, lopatky, hlavu i hřbety rukou. "Plav" rukama nahoru a dolů.', duration: '5x' },
+    { id: 'r-6', category: 'rameno', headline: 'Protažení tricepsu', description: 'Zvedni ruku, pokrč v lokti, sáhni si na lopatku. Druhou rukou jemně tlač na loket.', duration: '15s / str' },
+    { id: 'r-7', category: 'rameno', headline: 'Ramena k uším', description: 'Vytáhni ramena maximálně k uším (nádech) a pusť je volným pádem dolů (výdech).', duration: '5x' },
+    { id: 'r-8', category: 'rameno', headline: 'Dveřní futra', description: 'Opři se předloktími o zárubně dveří a krokem dopředu protlač hrudník. Nejlepší cvik na prsní svaly.', duration: '30s' },
+    { id: 'r-9', category: 'rameno', headline: 'Lopatky k sobě', description: 'Předpaž. S výdechem stáhni lopatky k sobě (jako bys jimi chtěl/a lousknout ořech).', duration: '10x' },
+    { id: 'r-10', category: 'rameno', headline: 'Rotace dlaní', description: 'Rozpaž. Jednu dlaň otoč nahoru, druhou dolů. Dívej se vždy do té otevřené dlaně a střídej.', duration: '20s' },
+    { id: 'r-11', category: 'rameno', headline: 'Plavání na suchu', description: 'Prováděj velké záběry pažemi jako při znaku. Uvolni ramenní kloub.', duration: '10x' },
+    { id: 'r-12', category: 'rameno', headline: 'Křížem krážem', description: 'Připaž pravou ruku přes hrudník doleva. Levou rukou ji přitiskni k tělu. Protáhneš zadní rameno.', duration: '15s / str' },
+    { id: 'r-13', category: 'rameno', headline: 'Lokty u těla', description: 'Píšeš na klávesnici s lokty v luftu? Polož je nebo je drž u těla. Trapézy ti poděkují.', duration: 'Trvale' },
+    { id: 'r-14', category: 'rameno', headline: 'Myš daleko?', description: 'Máš myš moc daleko? Natahování ruky přetěžuje rameno. Přisuň si ji blíž.', duration: 'Trvale' },
+    { id: 'r-15', category: 'rameno', headline: 'Y pozice', description: 'Vstaň a vzpaž ruce do tvaru Y. Vytáhni se z pasu, nadechni se do hrudníku.', duration: '10s' },
+    { id: 'r-16', category: 'rameno', headline: 'Automobilový pás', description: 'Chyť s výdechem "pás" (jako v autě) křížem přes tělo a vytáhni ruku nahoru a do strany.', duration: '5x / str' },
+    { id: 'r-17', category: 'rameno', headline: 'Kroužky lokty', description: 'Dej ruce na ramena (prsty se dotýkají). Kresli lokty velké kruhy.', duration: '10x' },
+    { id: 'r-18', category: 'rameno', headline: 'Prayer pose za zády', description: 'Zkus spojit dlaně za zády (jako při modlitbě, ale vzadu). Pokud to nejde, chytni se za lokty.', duration: '20s' },
+    { id: 'r-19', category: 'rameno', headline: 'Vytřepání', description: 'Pusť ruce volně podél těla a pořádně je vytřepej, od ramen až po konečky prstů.', duration: '10s' },
+    { id: 'r-20', category: 'rameno', headline: 'Klik o stůl', description: 'Opři se rukama o stůl/zeď a udělej pár kliků. Pozor na zpevněný střed těla.', duration: '10x' },
+    { id: 'r-21', category: 'rameno', headline: 'Hřbety rukou', description: 'Opři hřbety rukou o boky (v pase). Zkus lokty tlačit dopředu k sobě.', duration: '15s' },
+    { id: 'r-22', category: 'rameno', headline: 'Hrudní záklon', description: 'Opři se horní částí zad o opěradlo židle, dej ruce v týl a zakloň se přes opěradlo.', duration: '15s' },
+    { id: 'r-23', category: 'rameno', headline: 'Box', description: 'Udělej pár rychlých úderů do vzduchu. Uvolníš napětí a aktivuješ svaly pletence.', duration: '20s' },
+    { id: 'r-24', category: 'rameno', headline: 'Vertikální myš', description: 'Bolí zápěstí i rameno? Zvaž vertikální myš, ruka je v přirozenější poloze.', duration: 'Tip' },
+    { id: 'r-25', category: 'rameno', headline: 'Kabelka/Batoh', description: 'Nosíš tašku jen na jednom rameni? Střídej to, nebo si pořiď batoh.', duration: 'Trvale' },
+
+    // --- STRES / ÚNAVA (25 tips) ---
+    { id: 's-1', category: 'stres', headline: 'Boxový dech', description: 'Nádech 4s, zádrž 4s, výdech 4s, zádrž 4s. Nejrychlejší reset nervového systému.', duration: '1 min' },
+    { id: 's-2', category: 'stres', headline: 'Pohled do dálky', description: 'Zvedni oči od monitoru. Najdi nejvzdálenější bod venku a zaostři na něj.', duration: '20s' },
+    { id: 's-3', category: 'stres', headline: 'Studená voda', description: 'Jdi do koupelny a opláchni si obličej a zápěstí ledovou vodou.', duration: '2 min' },
+    { id: 's-4', category: 'stres', headline: 'Proklepání těla', description: 'Vstaň a "oklepej" se jako pes. Ruce, nohy, trup. Setřes ze sebe tu tíhu.', duration: '30s' },
+    { id: 's-5', category: 'stres', headline: 'Jazyk na patro', description: 'Opři špičku jazyka o horní patro za zuby. Uvolní čelist a zklidní mysl.', duration: 'Ihned' },
+    { id: 's-6', category: 'stres', headline: '20-20-20', description: 'Každých 20 minut se podívej na 20 stop (6 metrů) daleko po dobu 20 vteřin.', duration: 'Pravidlo' },
+    { id: 's-7', category: 'stres', headline: 'Zívání', description: 'Vynuceně si zívni. Okysličíš mozek a ochladíš ho.', duration: '10s' },
+    { id: 's-8', category: 'stres', headline: 'Vědomá káva', description: 'Piješ kávu u mailů? Zastav se. Vypij ji bez koukání do obrazovky. Vnímej chuť.', duration: '5 min' },
+    { id: 's-9', category: 'stres', headline: 'Procházka schody', description: 'Vyhni se výtahu. Vyjdi/sejdi jedno patro pěšky. Krevní oběh se probudí.', duration: '2 min' },
+    { id: 's-10', category: 'stres', headline: 'Power pose', description: 'Postav se rozkročmo, ruce v bok nebo do V (vítěz). Zvyšuje testosteron, snižuje kortizol.', duration: '1 min' },
+    { id: 's-11', category: 'stres', headline: 'Masáž uší', description: 'Promni si uční lalůčky a celé boltce. Jsou tam akupresurní body pro zklidnění.', duration: '30s' },
+    { id: 's-12', category: 'stres', headline: 'Vypni notifikace', description: 'Na hodinu si dej režim "Nerušit". Svět se nezboří a ty práci doděláš 2x rychleji.', duration: '1 hod' },
+    { id: 's-13', category: 'stres', headline: 'Úklid stolu', description: 'Chaos na stole = chaos v hlavě. Srovnej si věci kolem sebe.', duration: '2 min' },
+    { id: 's-14', category: 'stres', headline: '4-7-8 dech', description: 'Nádech nosem na 4, zádrž na 7, pomalý výdech ústy na 8. Usínací a zklidňující technika.', duration: '3 cykly' },
+    { id: 's-15', category: 'stres', headline: 'Úsměv', description: 'I nucený úsměv posílá do mozku signál "je to v pohodě". Zkus to, drž 10 vteřin.', duration: '10s' },
+    { id: 's-16', category: 'stres', headline: 'Skenování těla', description: 'Zavři oči. Projdi myslí tělo od palců u nohou po hlavu. Kde máš napětí? Povol ho.', duration: '1 min' },
+    { id: 's-17', category: 'stres', headline: 'Hudba', description: 'Pusť si jednu oblíbenou písničku, která tě nakopne nebo uklidní.', duration: '3 min' },
+    { id: 's-18', category: 'stres', headline: 'Větrání', description: 'Máš v místnosti vydýcháno? Otevři okno dokořán a pusť dovnitř kyslík.', duration: '2 min' },
+    { id: 's-19', category: 'stres', headline: 'Dlaně na oči', description: 'Zahřej dlaně o sebe a přilož je na zavřené oči. Tma a teplo regenerují zrak.', duration: '30s' },
+    { id: 's-20', category: 'stres', headline: 'Jdi bos/a', description: 'Zuj si boty pod stolem. Zahýbej prsty, vnímej kontakt se zemí.', duration: 'Ihned' },
+    { id: 's-21', category: 'stres', headline: 'Horký čaj', description: 'Teplý nápoj uklidňuje. Udělej si bylinkový čaj (meduňka, heřmánek).', duration: '5 min' },
+    { id: 's-22', category: 'stres', headline: 'Piš rukou', description: 'Potřebuješ si něco srovnat? Napiš to na papír tužkou. Zapojuješ jinou část mozku.', duration: '2 min' },
+    { id: 's-23', category: 'stres', headline: 'Obejmi se', description: 'Křížem si polož ruce na ramena a pevně se stiskni. Vyplavuje oxytocin.', duration: '20s' },
+    { id: 's-24', category: 'stres', headline: 'Aromaterapie', description: 'Čichni si k citrusu (povzbuzení) nebo levanduli (uklidnění).', duration: 'Ihned' },
+    { id: 's-25', category: 'stres', headline: 'Nic', description: 'Nedělej vůbec nic. Jen seď a koukej do zdi. Nech myšlenky plynout.', duration: '1 min' },
 ];
