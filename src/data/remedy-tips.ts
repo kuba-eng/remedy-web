@@ -17,14 +17,15 @@ export const CATEGORIES: { id: TipCategory; label: string }[] = [
     { id: 'stres_regenerace', label: 'Stres / Únava' }
 ];
 
-// Helper to determine type based on headline
-const getType = (headline: string): TipType => {
+// Helper to determine type based on headline (or use manual if provided)
+const getType = (headline: string, manualType?: TipType): TipType => {
+    if (manualType) return manualType;
     if (headline.startsWith("Víte, že") || headline.startsWith("Víte, že")) return 'vite_ze';
     if (headline.startsWith("Motivace:")) return 'motivace';
     return 'tip';
 };
 
-const RAW_TIPS: Omit<Tip, 'type'>[] = [
+const RAW_TIPS: (Omit<Tip, 'type'> & { type?: TipType })[] = [
     { "id": "K01", "category": "krk_hlava", "headline": "Krk není vždy krk", "body": "Ztuhlý krk často souvisí s mělkým dechem a staženou čelistí.", "micro": "3× nádech do žeber (do stran), při výdechu povol čelist a jazyk." },
     { "id": "K02", "category": "krk_hlava", "headline": "Brada dolů, ne dopředu", "body": "Vysunutá brada umí přetížit šíji rychleji než špatná židle.", "micro": "Zasuň bradu o 2 mm dozadu (bez záklonu), 5 pomalých výdechů." },
     { "id": "K03", "category": "krk_hlava", "headline": "Oči tahají krk", "body": "Dlouhé koukání do blízka často stáhne šíji i čelo.", "micro": "Podívej se 10 s do dálky, pak 10 s jemně krouž očima." },
@@ -148,10 +149,54 @@ const RAW_TIPS: Omit<Tip, 'type'>[] = [
     { "id": "S27", "category": "stres_regenerace", "headline": "Motivace: stačí 60 sekund", "body": "Regenerace není projekt. Je to drobná rutina, která se dá stihnout vždy.", "micro": "60 s: pomalá chůze + nosní dech, výdech delší." },
     { "id": "S28", "category": "stres_regenerace", "headline": "Víte, že mikro-pauzy zvedají výkon?", "body": "Krátké pauzy umí snížit únavu a zlepšit soustředění během dne.", "micro": "2 min: bez mobilu, jen klidný nosní dech + uvolnit ramena." },
     { "id": "S29", "category": "stres_regenerace", "headline": "Motivace: nedělej to dokonale", "body": "Lepší je “trochu často” než “hodně občas”. Tělo to pozná.", "micro": "3×: výdech, ramena dolů, chodidla plně na zemi." },
-    { "id": "S30", "category": "stres_regenerace", "headline": "Víte, že světlo ladí rytmus?", "body": "Krátký kontakt s denním světlem pomáhá tělu držet režim dne a noci.", "micro": "3–5 min venku nebo u okna + 5 dlouhých výdechů." }
+    { "id": "S30", "category": "stres_regenerace", "headline": "Víte, že světlo ladí rytmus?", "body": "Krátký kontakt s denním světlem pomáhá tělu držet režim dne a noci.", "micro": "3–5 min venku nebo u okna + 5 dlouhých výdechů." },
+
+    { "id": "K31", "category": "krk_hlava", "type": "vite_ze", "headline": "Víte, že zuby od sebe uleví krku?", "body": "Nevědomé skřípání nebo stisk zubů často zvedá napětí v šíji.", "micro": "Rty zavřené, zuby od sebe, jazyk volně. 5 dlouhých výdechů." },
+    { "id": "K32", "category": "krk_hlava", "type": "motivace", "headline": "Motivace: Nečekej na “až”", "body": "Krk nemá rád velké plány. Má rád malou změnu hned.", "micro": "20 s: ramena dolů + brada o 2 mm dozadu + dlouhý výdech." },
+    { "id": "K33", "category": "krk_hlava", "type": "tip", "headline": "Krk chce pauzu od fixace", "body": "Když je hlava dlouho v jedné pozici, šíje se rychle unaví.", "micro": "10×: jemně otoč hlavu o pár stupňů doprava/doleva (bez bolesti) + výdech." },
+    { "id": "K34", "category": "krk_hlava", "type": "vite_ze", "headline": "Víte, že dýchání do žeber zklidní trapézy?", "body": "Když dýcháš “nahoru do ramen”, trapézy se snadno přetíží.", "micro": "Ruce na žebra: 5 nádechů do stran, výdech pomalý a tichý." },
+    { "id": "K35", "category": "krk_hlava", "type": "motivace", "headline": "Motivace: 1% změna = velký rozdíl", "body": "Nemusíš přestavět život. Stačí o kousek snížit napětí.", "micro": "3 kola: nádech nosem, výdech delší, při výdechu povol čelist." },
+    { "id": "K36", "category": "krk_hlava", "type": "tip", "headline": "Uvolni “ramenní věšák”", "body": "Krk často drží napětí, když ramena visí v předu.", "micro": "8×: vytáhni se za temenem, pak lopatky dolů/dozadu (jemně)." },
+    { "id": "K37", "category": "krk_hlava", "type": "tip", "headline": "Reset pro oči i krk", "body": "Krk často tuhne spolu s očima při práci do blízka.", "micro": "20 s: dívej se do dálky + 5 pomalých mrknutí + 1 dlouhý výdech." },
+    { "id": "K38", "category": "krk_hlava", "type": "vite_ze", "headline": "Víte, že poloha rukou mění krk?", "body": "Zvednuté lokty a práce “ve vzduchu” často zvedne ramena a šíji.", "micro": "Opři předloktí, lokty blíž k tělu, 4 pomalé výdechy." },
+    { "id": "K39", "category": "krk_hlava", "type": "motivace", "headline": "Motivace: Krk není nepřítel", "body": "Je to jen alarm. A alarm jde ztišit rytmem, ne bojem.", "micro": "Nádech 4 s, výdech 6 s, 4 kola. Ramena nech spadnout." },
+    { "id": "K40", "category": "krk_hlava", "type": "tip", "headline": "Jemné protažení prsou", "body": "Stažený předek těla často tahá ramena dopředu a krk to odnese.", "micro": "20 s ve futrech: předloktí opři, jemně otevři hrudník, dýchej." },
+
+    { "id": "B31", "category": "bedra", "type": "vite_ze", "headline": "Víte, že bedra nemají ráda “zámek” kolen?", "body": "Přepnutá kolena často zvyšují napětí v bedrech při stání.", "micro": "Odemkni kolena o 5 %, rozlož váhu na celé chodidlo, 3 výdechy." },
+    { "id": "B32", "category": "bedra", "type": "motivace", "headline": "Motivace: Nepotřebuješ hodinu", "body": "Zádům často stačí minuta správného impulzu.", "micro": "60 s: chůze na místě + výdech delší než nádech." },
+    { "id": "B33", "category": "bedra", "type": "tip", "headline": "Pánevní kruhy pro úlevu", "body": "Jemný pohyb pánve může snížit pocit sevření v bedrech.", "micro": "20 s: malé kroužení pánví na jednu stranu, 20 s na druhou." },
+    { "id": "B34", "category": "bedra", "type": "vite_ze", "headline": "Víte, že “dokonalé sezení” neexistuje?", "body": "Tělo je stavěné na střídání — záda ocení změnu víc než pravidla.", "micro": "30 s: posaď se jinak (víc na sedací kosti), pak 3 výdechy." },
+    { "id": "B35", "category": "bedra", "type": "motivace", "headline": "Motivace: Udělej to jednoduše", "body": "Když je to moc složité, tělo nedostane nic. Jednoduché vyhrává.", "micro": "20 s: postav se, protřepej nohy, 4 klidné výdechy." },
+    { "id": "B36", "category": "bedra", "type": "tip", "headline": "Hýždě zapnout, bedra vypnout", "body": "Jemná aktivace hýždí často uleví bedrům od zbytečné práce.", "micro": "10×: zatni hýždě na 1 s, povol. Bez prohnutí zad." },
+    { "id": "B37", "category": "bedra", "type": "tip", "headline": "Kyčelní pochod", "body": "Když kyčle “spí”, bedra často přebírají krok i stabilitu.", "micro": "30 s: pochod na místě, kolena střídat, dýchej plynule." },
+    { "id": "B38", "category": "bedra", "type": "vite_ze", "headline": "Víte, že stres zvyšuje vnímání ztuhlosti?", "body": "Když systém jede v napětí, tělo se často stáhne jako celek — i bedra.", "micro": "4 kola: nádech 4 s, výdech 6 s. Při výdechu povol břicho o 10%." },
+    { "id": "B39", "category": "bedra", "type": "motivace", "headline": "Motivace: Dnes stačí “o kousek líp”", "body": "Nemusíš to vyřešit navždy. Stačí dnes snížit tlak o 10 %.", "micro": "2 min: klidná chůze + ramena dolů + dlouhý výdech." },
+    { "id": "B40", "category": "bedra", "type": "tip", "headline": "Reset ve stoji", "body": "Krátké vyrovnání opory často uleví zádům okamžitě.", "micro": "Stůj na obou nohách, váha 50/50, chodidla celá na zemi, 5 výdechů." },
+
+    { "id": "R31", "category": "rameno_lopatky", "type": "vite_ze", "headline": "Víte, že úchop řídí rameno?", "body": "Silný stisk (myš, mobil, nářadí) posílá napětí až do ramene a krku.", "micro": "Povol úchop o 20 % a udělej 4 dlouhé výdechy." },
+    { "id": "R32", "category": "rameno_lopatky", "type": "motivace", "headline": "Motivace: Rameno chce bezpečí", "body": "Bezpečný rozsah je pokrok. Z něj roste lehkost.", "micro": "10× zvedni paži jen do komfortu, každý pohyb s výdechem." },
+    { "id": "R33", "category": "rameno_lopatky", "type": "tip", "headline": "Lopatka dolů, rameno klid", "body": "Když lopatka “sjede dolů”, rameno často přestane bojovat.", "micro": "10×: lopatka dolů/dozadu, ramena mimo uši, dýchej." },
+    { "id": "R34", "category": "rameno_lopatky", "type": "vite_ze", "headline": "Víte, že opora předloktí šetří trapézy?", "body": "Když ruce nemají oporu, ramena drží napětí navíc celý den.", "micro": "Opři předloktí (stůl/stehna) a dej 5 klidných výdechů." },
+    { "id": "R35", "category": "rameno_lopatky", "type": "motivace", "headline": "Motivace: Nezvedej tlak, zvedej kvalitu", "body": "Méně síly, víc kontroly — ramena to ocení.", "micro": "30 s: pomalé kroužení ramen dozadu, 1 kruh = 4 s." },
+    { "id": "R36", "category": "rameno_lopatky", "type": "tip", "headline": "Mini otevření hrudníku", "body": "Stažený hrudník posílá ramena dopředu a přetěžuje předek ramene.", "micro": "20 s ve futrech: jemně otevři hrudník, výdech prodluž." },
+    { "id": "R37", "category": "rameno_lopatky", "type": "tip", "headline": "Lokty blíž k tělu", "body": "Lokty “od těla” často přetíží ramena u PC i u řízení.", "micro": "Přitáhni lokty k tělu, uvolni šíji, 4 dlouhé výdechy." },
+    { "id": "R38", "category": "rameno_lopatky", "type": "vite_ze", "headline": "Víte, že krk může brzdit rameno?", "body": "Napětí v šíji často zhorší volnost ramenního pohybu.", "micro": "Nejdřív 3 výdechy + čelist volně, pak 8× krouž rameny." },
+    { "id": "R39", "category": "rameno_lopatky", "type": "motivace", "headline": "Motivace: Méně je často víc", "body": "Když rameno zlobí, jemnost a rytmus jsou lepší než boj.", "micro": "20 s: malé kroužení ramen + 3 dlouhé výdechy." },
+    { "id": "R40", "category": "rameno_lopatky", "type": "tip", "headline": "Zadní kapsy", "body": "Jednoduchý obraz často zlepší držení lopatek během vteřin.", "micro": "10×: “zasuň lopatky do zadních kapes” (jemně) a povol." },
+
+    { "id": "S31", "category": "stres_regenerace", "type": "vite_ze", "headline": "Víte, že rytmus dýchání mění stav těla?", "body": "Tělo reaguje na rytmus: delší výdech často znamená víc klidu.", "micro": "5 kol: nádech 4 s, výdech 6–7 s, ramena dolů." },
+    { "id": "S32", "category": "stres_regenerace", "type": "motivace", "headline": "Motivace: Regenerace je dovednost", "body": "Nečekej, až bude čas. Dělej to v malém — tím to vyhraješ.", "micro": "60 s: chodidla celá na zemi + nosní dech + dlouhý výdech." },
+    { "id": "S33", "category": "stres_regenerace", "type": "tip", "headline": "2 min bez vstupů", "body": "Krátké ticho často sníží přetížení rychleji než další stimul.", "micro": "2 min: bez mobilu, jen nosní dech a uvolnit čelo." },
+    { "id": "S34", "category": "stres_regenerace", "type": "vite_ze", "headline": "Víte, že pohled do dálky zklidňuje?", "body": "Tunelové vidění na blízko drží mozek ve vysoké pozornosti.", "micro": "15 s koukej do dálky + 5 pomalých mrknutí + výdech." },
+    { "id": "S35", "category": "stres_regenerace", "type": "motivace", "headline": "Motivace: Nepotřebuješ perfektní den", "body": "Potřebuješ jen pár mikro momentů, kdy tělo přepne z “napětí” do “klidu”.", "micro": "3×: dlouhý výdech + ramena dolů + povolit čelist." },
+    { "id": "S36", "category": "stres_regenerace", "type": "tip", "headline": "Reset přes chodidla", "body": "Kontakt se zemí může rychle snížit vnitřní “spěch”.", "micro": "10 s vnímej celé chodidlo + 4 dlouhé výdechy." },
+    { "id": "S37", "category": "stres_regenerace", "type": "tip", "headline": "Výdech a čelist", "body": "Čelist je častý “držák” stresu. Když povolí, povolí i zbytek.", "micro": "Zuby od sebe, jazyk volně, 5 výdechů (delších než nádech)." },
+    { "id": "S38", "category": "stres_regenerace", "type": "vite_ze", "headline": "Víte, že krátká chůze po jídle pomáhá energii?", "body": "Jemný pohyb po jídle často zlepší pocit lehkosti i regenerace.", "micro": "5 min klidné chůze (stačí i doma)." },
+    { "id": "S39", "category": "stres_regenerace", "type": "motivace", "headline": "Motivace: Udělej prostor v hlavě i v těle", "body": "Někdy stačí dát systému signál: “teď je klid”.", "micro": "Nádech 3–4 s, výdech 6 s, 4 kola. Obočí uvolni." },
+    { "id": "S40", "category": "stres_regenerace", "type": "tip", "headline": "Zpomal o 10 %", "body": "Když zpomalíš pohyb a řeč o trochu, tělo často přestane “utíkat”.", "micro": "Na 60 s zpomal tempo a dej 5 klidných výdechů nosem." }
 ];
 
 export const REMEDY_TIPS: Tip[] = RAW_TIPS.map(tip => ({
     ...tip,
-    type: getType(tip.headline)
+    type: getType(tip.headline, tip.type)
 }));
