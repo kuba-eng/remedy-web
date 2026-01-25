@@ -62,7 +62,7 @@ export const PRICING_DATA: PricingItem[] = [
     {
         id: "kranio",
         title: "Kraniosakrální Terapie",
-        subtitle: "Terapie",
+        subtitle: "Ondra",
         timeRange: "60 - 90 min",
         iconName: "Brain",
         prices: [
@@ -113,11 +113,10 @@ export const PRICING_DATA: PricingItem[] = [
         id: "diagnostika",
         title: "InBody Diagnostika",
         subtitle: "Kuba",
-        timeRange: "60 min",
+        timeRange: "15 min",
         iconName: "Scale",
         prices: [
-            { label: "Dospělí", price: "1 200 Kč" },
-            { label: "Děti", price: "800 Kč" },
+            { label: "1x analýza ", price: "500 Kč" },
         ],
     },
 ];

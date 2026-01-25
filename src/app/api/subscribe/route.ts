@@ -67,7 +67,7 @@ export async function POST(request: Request) {
         if (process.env.RESEND_API_KEY) {
             // Admin Email
             await resend.emails.send({
-                from: 'Remedy Web <info@remedy.cz>',
+                from: 'Remedy Web <onboarding@resend.dev>',
                 to: 'kuba@remedy.cz',
                 subject: `Nový odběratel Remedy: ${email}`,
                 html: `
@@ -108,7 +108,7 @@ export async function POST(request: Request) {
                 `).join('');
 
                 await resend.emails.send({
-                    from: 'Kuba z Remedy <info@remedy.cz>', // Requires domain verification for custom FROM, standard works for testing if TO is verified.
+                    from: 'Remedy Fyzio <onboarding@resend.dev>', // Requires domain verification for custom FROM, standard works for testing if TO is verified.
                     // CRITICAL: If domain is not verified, this will FAIL for any 'to' except kuba@remedy.cz.
                     to: email,
                     subject: 'Tvých 5 tipů pro zdravější tělo (Remedy)',
