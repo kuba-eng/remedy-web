@@ -8,7 +8,7 @@ import { REMEDY_TIPS, CATEGORIES, Tip, TipCategory } from "@/data/remedy-tips";
 
 const STORAGE_KEY_DISMISSED = "remedy-snack-dismissed";
 const STORAGE_KEY_PERMANENT = "remedy-snack-permanent";
-const RESERVATION_URL = "https://remedy.reenio.cz"; // Placeholder (should be updated if different)
+const RESERVATION_URL = "https://rezervace.remedy.cz";
 const PRIVACY_URL = "/ochrana-udaju";
 
 export function RemedySnack() {
