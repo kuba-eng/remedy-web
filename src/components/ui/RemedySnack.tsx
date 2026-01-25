@@ -71,32 +71,54 @@ export function RemedySnack() {
         setView('TIP');
     };
 
-    const showTip = (cat: TipCategory) => {
-        // 1. Determine target type based on probability
+    // Helper for weighted random selection
+    const getWeightedType = (): 'tip' | 'vite_ze' | 'motivace' => {
         const rand = Math.random();
-        let targetType: 'tip' | 'vite_ze' | 'motivace' = 'tip';
-        if (rand > 0.4 && rand <= 0.7) targetType = 'vite_ze'; // 30%
-        if (rand > 0.7) targetType = 'motivace'; // 30%
+        if (rand <= 0.4) return 'tip';
+        if (rand <= 0.7) return 'vite_ze';
+        return 'motivace';
+    };
 
-        // 2. Filter tips by category and type
-        const categoryTips = REMEDY_TIPS.filter(t => t.category === cat);
-        let candidates = categoryTips.filter(t => t.type === targetType);
+    const showTip = (cat: TipCategory) => {
+        // 1. Get history from localStorage to avoid repetition
+        const lastTipIdKey = `remedy_last_tip_${cat}`;
+        const lastTypeKey = `remedy_last_type_${cat}`;
 
-        // Fallback: if no tips of target type exist, use all category tips
-        if (candidates.length === 0) candidates = categoryTips;
+        const lastTipId = localStorage.getItem(lastTipIdKey);
+        const lastType = localStorage.getItem(lastTypeKey);
 
-        // 3. Select random tip, avoiding immediate repetition
-        let nextTip = candidates[Math.floor(Math.random() * candidates.length)];
+        // 2. Determine target type (try to avoid same type twice if possible - max 3 attempts)
+        let targetType = getWeightedType();
+        let attempts = 0;
 
-        if (currentTip && candidates.length > 1 && nextTip.id === currentTip.id) {
-            // If we picked the same one, try to pick another from the same candidate pool
-            const otherCandidates = candidates.filter(t => t.id !== currentTip.id);
-            if (otherCandidates.length > 0) {
-                nextTip = otherCandidates[Math.floor(Math.random() * otherCandidates.length)];
-            }
+        // Optional: Try to diversify type if it matches the last one
+        while (lastType && targetType === lastType && attempts < 3) {
+            targetType = getWeightedType();
+            attempts++;
         }
 
-        setCurrentTip(nextTip);
+        // 3. Filter candidates
+        const categoryTips = REMEDY_TIPS.filter(t => t.category === cat);
+        let candidates = categoryTips.filter(t => t.type === targetType && t.id !== lastTipId);
+
+        // 4. Fallback if no candidates found (e.g. only 1 tip of that type exists and it was just shown)
+        if (candidates.length === 0) {
+            // broaden search to any type in category, just avoid the exact same ID
+            candidates = categoryTips.filter(t => t.id !== lastTipId);
+
+            // Absolute fallback - if there's only 1 tip total in category, we must show it
+            if (candidates.length === 0) candidates = categoryTips;
+        }
+
+        // 5. Select Tip
+        const selectedTip = candidates[Math.floor(Math.random() * candidates.length)];
+
+        // 6. Save state
+        if (selectedTip) {
+            localStorage.setItem(lastTipIdKey, selectedTip.id);
+            localStorage.setItem(lastTypeKey, selectedTip.type);
+            setCurrentTip(selectedTip);
+        }
     };
 
     const handleNextTip = () => {
