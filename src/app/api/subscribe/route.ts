@@ -26,12 +26,12 @@ export async function POST(request: Request) {
             </ul>`
             : '<p><em>Žádné oblíbené tipy.</em></p>';
 
-        console.log("📨 Sending email via Resend to info@remedy.cz...");
+        console.log("📨 Sending email via Resend to kuba@remedy.cz...");
 
         if (process.env.RESEND_API_KEY) {
             await resend.emails.send({
                 from: 'Remedy Web <onboarding@resend.dev>', // Default testing domain, user can change later if they verified domain
-                to: 'info@remedy.cz',
+                to: 'kuba@remedy.cz',
                 subject: `Nový odběratel Remedy: ${email}`,
                 html: `
                     <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 8px;">
