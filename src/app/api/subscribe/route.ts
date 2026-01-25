@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 export async function POST(request: Request) {
     try {
         const body = await request.json();
-        const { email, category } = body;
+        const { email, category, favorites } = body;
 
         if (!email) {
             return NextResponse.json({ error: 'Email is required' }, { status: 400 });
@@ -17,6 +17,14 @@ export async function POST(request: Request) {
         console.log("🔥 NEW REMEDY SUBSCRIBER 🔥");
         console.log("Email:", email);
         console.log("Interest Category:", category || 'General');
+
+        if (favorites && favorites.length > 0) {
+            console.log("⭐ User Favorites:");
+            favorites.forEach((fav: any) => { // using any for quick iteration
+                console.log(`   - [${fav.type}] ${fav.headline} (${fav.id})`);
+            });
+        }
+
         console.log("Timestamp:", new Date().toISOString());
         console.log("---------------------------------------------------");
 

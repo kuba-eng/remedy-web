@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronRight, Mail, Calendar, ExternalLink, RefreshCw } from "lucide-react";
+import { X, ChevronRight, Mail, Calendar, ExternalLink, RefreshCw, ThumbsUp, Star } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { REMEDY_TIPS, CATEGORIES, Tip, TipCategory } from "@/data/remedy-tips";
 
@@ -18,6 +18,57 @@ export function RemedySnack() {
     const [currentTip, setCurrentTip] = useState<Tip | null>(null);
     const [email, setEmail] = useState("");
     const [emailSent, setEmailSent] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    // --- FAVORITES LOGIC ---
+    interface FavoriteItem {
+        id: string;
+        category: string;
+        type: string;
+        headline: string;
+        ts: number;
+    }
+
+    const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
+    const [showFavorites, setShowFavorites] = useState(false);
+
+    useEffect(() => {
+        const stored = localStorage.getItem("remedy_favorites");
+        if (stored) {
+            try {
+                setFavorites(JSON.parse(stored));
+            } catch (e) {
+                console.error("Failed to parse favorites", e);
+            }
+        }
+    }, []);
+
+    const toggleFavorite = () => {
+        if (!currentTip) return;
+
+        // Check if already favorited
+        const isFav = favorites.some(f => f.id === currentTip.id);
+
+        let newFavs;
+        if (isFav) {
+            newFavs = favorites.filter(f => f.id !== currentTip.id);
+        } else {
+            const newItem: FavoriteItem = {
+                id: currentTip.id,
+                category: currentTip.category,
+                type: currentTip.type,
+                headline: currentTip.headline,
+                ts: Date.now()
+            };
+            // Add to start, keep max 30
+            newFavs = [newItem, ...favorites].slice(0, 30);
+        }
+
+        setFavorites(newFavs);
+        localStorage.setItem("remedy_favorites", JSON.stringify(newFavs));
+    };
+
+    const isCurrentFavorite = currentTip ? favorites.some(f => f.id === currentTip.id) : false;
 
     // --- TRIGGER LOGIC ---
     useEffect(() => {
@@ -125,10 +176,6 @@ export function RemedySnack() {
         if (selectedCategory) showTip(selectedCategory);
     };
 
-    const [isSubmitting, setIsSubmitting] = useState(false);
-
-    // ... (rest of code) ...
-
     const handleEmailSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
@@ -139,7 +186,8 @@ export function RemedySnack() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     email,
-                    category: selectedCategory
+                    category: selectedCategory,
+                    favorites: favorites.slice(0, 5) // Send top 5 favs
                 })
             });
 
@@ -184,12 +232,15 @@ export function RemedySnack() {
                                 <X className="w-5 h-5" />
                             </button>
                         </div>
-                        <button
-                            onClick={() => handleDismiss(true)}
-                            className="absolute bottom-2 right-4 text-[10px] text-white/10 hover:text-white/40 uppercase tracking-widest transition-colors"
-                        >
-                            Už nezobrazovat
-                        </button>
+                        {view === 'INITIAL' && (
+                            <button
+                                onClick={() => handleDismiss(true)}
+                                className="absolute bottom-2 right-4 text-[10px] text-white/10 hover:text-white/40 uppercase tracking-widest transition-colors"
+                            >
+                                Už nezobrazovat
+                            </button>
+                        )}
+
 
                         {/* --- VIEW: INITIAL --- */}
                         {view === 'INITIAL' && (
@@ -214,66 +265,141 @@ export function RemedySnack() {
                                         </button>
                                     ))}
                                 </div>
+                                {favorites.length > 0 && (
+                                    <div className="pt-2 border-t border-white/5 flex justify-between items-center text-xs">
+                                        <button
+                                            onClick={() => { setView('TIP'); setShowFavorites(true); }}
+                                            className="text-[#D9F99D] hover:underline flex items-center gap-1"
+                                        >
+                                            <Star className="w-3 h-3" /> Mé oblíbené ({favorites.length})
+                                        </button>
+                                    </div>
+                                )}
                             </div>
                         )}
 
                         {/* --- VIEW: TIP --- */}
-                        {view === 'TIP' && currentTip && (
+                        {view === 'TIP' && (
                             <div className="space-y-4">
-                                <div className="flex items-center justify-between">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-2 h-2 rounded-full bg-[#D9F99D] shadow-[0_0_10px_#D9F99D]" />
-                                        <h3 className="text-[#D9F99D] font-bold text-xs tracking-widest uppercase">
-                                            Tip pro tebe
-                                        </h3>
-                                    </div>
-                                    <button onClick={handleNextTip} className="text-[#D9F99D]/50 hover:text-[#D9F99D] text-xs flex items-center gap-1 transition-colors">
-                                        <RefreshCw className="w-3 h-3" /> Další tip
-                                    </button>
-                                </div>
-
-                                <div>
-                                    <div className="flex items-baseline justify-between mb-2">
-                                        <h4 className="text-white font-bold text-lg leading-tight">{currentTip.headline}</h4>
-                                    </div>
-                                    <p className="text-stone-300 text-sm leading-relaxed mb-4">
-                                        {currentTip.body}
-                                    </p>
-
-                                    {/* MICRO TIP BLOCK */}
-                                    <div className="bg-[#D9F99D]/10 border border-[#D9F99D]/20 rounded-xl p-3 relative">
-                                        <div className="absolute -top-3 left-3 bg-[#1a1a1a] px-2 text-[10px] text-[#D9F99D] font-bold uppercase tracking-widest border border-[#D9F99D]/20 rounded-full">
-                                            {currentTip.type === 'motivace' ? 'Motivace' :
-                                                currentTip.type === 'vite_ze' ? 'Víte, že?' : 'Tip pro tebe'}
+                                {showFavorites ? (
+                                    // FAVORITES LIST VIEW
+                                    <div className="space-y-4">
+                                        <div className="flex items-center justify-between mb-2">
+                                            <h3 className="text-white font-bold flex items-center gap-2">
+                                                <Star className="w-4 h-4 text-[#D9F99D]" /> Tvé oblíbené tipy
+                                            </h3>
+                                            <button
+                                                onClick={() => setShowFavorites(false)}
+                                                className="text-xs text-[#D9F99D] hover:underline"
+                                            >
+                                                Zpět na tip
+                                            </button>
                                         </div>
-                                        <p className="text-[#D9F99D] text-sm font-medium leading-relaxed">
-                                            {currentTip.micro}
-                                        </p>
+                                        <div className="space-y-2 max-h-60 overflow-y-auto pr-2 custom-scrollbar">
+                                            {favorites.length === 0 ? (
+                                                <p className="text-stone-500 text-sm italic">Zatím žádné uložené.</p>
+                                            ) : (
+                                                favorites.map(fav => (
+                                                    <div key={fav.id} className="bg-white/5 p-3 rounded-lg border border-white/5 text-sm">
+                                                        <div className="text-[#D9F99D] text-[10px] uppercase font-bold mb-1 opacity-70">{fav.type.replace('_', ' ')}</div>
+                                                        <div className="text-stone-200 font-medium">{fav.headline}</div>
+                                                    </div>
+                                                ))
+                                            )}
+                                        </div>
                                     </div>
-                                </div>
+                                ) : currentTip ? (
+                                    // STANDARD TIP VIEW
+                                    <>
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-2 h-2 rounded-full bg-[#D9F99D] shadow-[0_0_10px_#D9F99D]" />
+                                                <h3 className="text-[#D9F99D] font-bold text-xs tracking-widest uppercase">
+                                                    Tip pro tebe
+                                                </h3>
+                                            </div>
+                                            <button onClick={handleNextTip} className="text-[#D9F99D]/50 hover:text-[#D9F99D] text-xs flex items-center gap-1 transition-colors">
+                                                <RefreshCw className="w-3 h-3" /> Další tip
+                                            </button>
+                                        </div>
 
+                                        <div>
+                                            <div className="flex items-baseline justify-between mb-2">
+                                                <h4 className="text-white font-bold text-lg leading-tight">{currentTip.headline}</h4>
+                                            </div>
+                                            <p className="text-stone-300 text-sm leading-relaxed mb-4">
+                                                {currentTip.body}
+                                            </p>
 
-                                <div className="pt-2 flex flex-col gap-2">
-                                    <a
-                                        href={RESERVATION_URL}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="w-full"
-                                    >
-                                        <Button className="w-full bg-[#D9F99D] text-black hover:bg-[#D9F99D]/90 h-10">
-                                            <Calendar className="w-4 h-4 mr-2" />
-                                            Rezervace
-                                        </Button>
-                                    </a>
-                                    <Button
-                                        variant="outline"
-                                        className="w-full border-white/20 hover:bg-white/5 text-stone-300 h-9 text-xs"
-                                        onClick={() => setView('EMAIL')}
-                                    >
-                                        <Mail className="w-3 h-3 mr-2" />
-                                        Pošli mi 5 tipů do mailu
-                                    </Button>
-                                </div>
+                                            {/* MICRO TIP BLOCK */}
+                                            <div className="bg-[#D9F99D]/10 border border-[#D9F99D]/20 rounded-xl p-3 relative">
+                                                <div className="absolute -top-3 left-3 bg-[#1a1a1a] px-2 text-[10px] text-[#D9F99D] font-bold uppercase tracking-widest border border-[#D9F99D]/20 rounded-full">
+                                                    {currentTip.type === 'motivace' ? 'Motivace' :
+                                                        currentTip.type === 'vite_ze' ? 'Víte, že?' : 'Tip pro tebe'}
+                                                </div>
+                                                <p className="text-[#D9F99D] text-sm font-medium leading-relaxed">
+                                                    {currentTip.micro}
+                                                </p>
+                                            </div>
+
+                                            {/* LIKE & FAVORITES ACTION */}
+                                            <div className="mt-3 flex items-center justify-between">
+                                                <button
+                                                    onClick={toggleFavorite}
+                                                    className={`text-xs flex items-center gap-1.5 px-2 py-1 rounded transition-colors ${isCurrentFavorite
+                                                            ? "text-[#D9F99D] bg-[#D9F99D]/10 border border-[#D9F99D]/20"
+                                                            : "text-stone-400 hover:text-white hover:bg-white/5"
+                                                        }`}
+                                                    aria-label={isCurrentFavorite ? "Odebrat z oblíbených" : "Přidat do oblíbených"}
+                                                    aria-pressed={isCurrentFavorite}
+                                                >
+                                                    {isCurrentFavorite ? (
+                                                        <><Star className="w-3 h-3 fill-current" /> Uloženo</>
+                                                    ) : (
+                                                        <><ThumbsUp className="w-3 h-3" /> Dneska mi to sedlo</>
+                                                    )}
+                                                </button>
+
+                                                <button
+                                                    onClick={() => setShowFavorites(true)}
+                                                    className="text-[10px] text-stone-500 hover:text-stone-300"
+                                                >
+                                                    Zobrazit oblíbené
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div className="pt-2 flex flex-col gap-2 border-t border-white/5">
+                                            <a
+                                                href={RESERVATION_URL}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="w-full"
+                                            >
+                                                <Button className="w-full bg-[#D9F99D] text-black hover:bg-[#D9F99D]/90 h-10">
+                                                    <Calendar className="w-4 h-4 mr-2" />
+                                                    Rezervace
+                                                </Button>
+                                            </a>
+                                            <Button
+                                                variant="outline"
+                                                className="w-full border-white/20 hover:bg-white/5 text-stone-300 h-9 text-xs"
+                                                onClick={() => setView('EMAIL')}
+                                            >
+                                                <Mail className="w-3 h-3 mr-2" />
+                                                Pošli mi 5 tipů do mailu
+                                            </Button>
+                                        </div>
+                                        <div className="text-center">
+                                            <button
+                                                onClick={() => { setView('INITIAL'); setShowFavorites(false); }}
+                                                className="text-[10px] text-stone-500 hover:text-stone-300 uppercase tracking-widest mt-1"
+                                            >
+                                                Zpět na výběr
+                                            </button>
+                                        </div>
+                                    </>
+                                ) : null}
                             </div>
                         )}
 
@@ -338,7 +464,6 @@ export function RemedySnack() {
                                 )}
                             </div>
                         )}
-
                     </div>
                 </motion.div>
             )}
