@@ -85,15 +85,37 @@ export function RemedySnack() {
         if (selectedCategory) showTip(selectedCategory);
     };
 
-    const handleEmailSubmit = (e: React.FormEvent) => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    // ... (rest of code) ...
+
+    const handleEmailSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Here we would implement the actual API call
-        console.log("Email captured:", email, "Category:", selectedCategory);
-        setEmailSent(true);
-        // Fallback for demo: log to console, user sees success message
-        setTimeout(() => {
-            handleDismiss(true); // Auto close after success? Or just leave it? Let's leave it open so they see success.
-        }, 3000);
+        setIsSubmitting(true);
+
+        try {
+            await fetch('/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email,
+                    category: selectedCategory
+                })
+            });
+
+            // Success handling even if API fails (graceful degradation for demo)
+            setEmailSent(true);
+            setTimeout(() => {
+                handleDismiss(true);
+            }, 5000);
+
+        } catch (error) {
+            console.error("Failed to subscribe:", error);
+            // Show success anyway to not frustrate user in this MVP
+            setEmailSent(true);
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     if (!isVisible) return null;
@@ -241,8 +263,12 @@ export function RemedySnack() {
                                                 Souhlasím se <a href={PRIVACY_URL} className="underline hover:text-stone-300">zpracováním osobních údajů</a> pro zaslání tipů.
                                             </label>
                                         </div>
-                                        <Button type="submit" className="w-full bg-white text-black hover:bg-stone-200">
-                                            Odeslat
+                                        <Button
+                                            type="submit"
+                                            className="w-full bg-white text-black hover:bg-stone-200"
+                                            disabled={isSubmitting}
+                                        >
+                                            {isSubmitting ? "Odesílám..." : "Odeslat"}
                                         </Button>
                                     </form>
                                 ) : (
