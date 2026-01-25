@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronRight, Mail, Calendar, ExternalLink, RefreshCw, ThumbsUp, Star } from "lucide-react";
+import { X, ChevronRight, Mail, Calendar, ExternalLink, RefreshCw, ThumbsUp, Star, Link, Check, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { REMEDY_TIPS, CATEGORIES, Tip, TipCategory } from "@/data/remedy-tips";
 
@@ -11,7 +11,11 @@ const STORAGE_KEY_PERMANENT = "remedy-snack-permanent";
 const RESERVATION_URL = "https://rezervace.remedy.cz";
 const PRIVACY_URL = "/ochrana-udaju";
 
-export function RemedySnack() {
+interface RemedySnackProps {
+    initialTipId?: string;
+}
+
+export function RemedySnack({ initialTipId }: RemedySnackProps) {
     const [isVisible, setIsVisible] = useState(false);
     const [view, setView] = useState<'INITIAL' | 'TIP' | 'EMAIL'>('INITIAL');
     const [selectedCategory, setSelectedCategory] = useState<TipCategory | null>(null);
@@ -19,6 +23,7 @@ export function RemedySnack() {
     const [email, setEmail] = useState("");
     const [emailSent, setEmailSent] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [copiedLink, setCopiedLink] = useState(false);
     const GENERAL_TAGS = ["krk", "bedra", "rameno", "stres"];
 
     // --- HELPER: SELECT TAGS TO DISPLAY ---
@@ -140,6 +145,18 @@ export function RemedySnack() {
 
     // --- TRIGGER LOGIC ---
     useEffect(() => {
+        // 0. Check for initialTipId (Deep Linking)
+        if (initialTipId) {
+            const tip = REMEDY_TIPS.find(t => t.id === initialTipId);
+            if (tip) {
+                setCurrentTip(tip);
+                setSelectedCategory(tip.category);
+                setView('TIP');
+                setIsVisible(true);
+                return; // Skip other triggers if deep linked
+            }
+        }
+
         // 1. Check permanent dismissal
         if (localStorage.getItem(STORAGE_KEY_PERMANENT)) return;
 
@@ -171,7 +188,7 @@ export function RemedySnack() {
             clearTimeout(timeTimer);
             window.removeEventListener("scroll", handleScroll);
         };
-    }, []);
+    }, [initialTipId]);
 
     // --- ACTIONS ---
 
@@ -271,6 +288,32 @@ export function RemedySnack() {
             setEmailSent(true);
         } finally {
             setIsSubmitting(false);
+        }
+    };
+
+    const handleShare = async () => {
+        if (!currentTip) return;
+        const url = `${window.location.origin}/tip/${currentTip.id}`;
+
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: `Remedy Tip: ${currentTip.headline}`,
+                    text: currentTip.body,
+                    url: url,
+                });
+            } catch (err) {
+                console.log('Share failed', err);
+            }
+        } else {
+            // Fallback to clipboard
+            try {
+                await navigator.clipboard.writeText(url);
+                setCopiedLink(true);
+                setTimeout(() => setCopiedLink(false), 2000);
+            } catch (err) {
+                console.error('Failed to copy', err);
+            }
         }
     };
 
@@ -392,8 +435,15 @@ export function RemedySnack() {
                                         </div>
 
                                         <div>
-                                            <div className="flex items-baseline justify-between mb-2">
+                                            <div className="flex items-start justify-between mb-2 gap-4">
                                                 <h4 className="text-white font-bold text-lg leading-tight">{currentTip.headline}</h4>
+                                                <button
+                                                    onClick={handleShare}
+                                                    className="shrink-0 p-2 -mr-2 -mt-2 rounded-full hover:bg-white/10 text-stone-500 hover:text-[#D9F99D] transition-colors"
+                                                    title="Sdílet tip"
+                                                >
+                                                    {copiedLink ? <Check className="w-5 h-5" /> : <Share2 className="w-5 h-5" />}
+                                                </button>
                                             </div>
                                             <p className="text-stone-300 text-sm leading-relaxed mb-3">
                                                 {currentTip.body}

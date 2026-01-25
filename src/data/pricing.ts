@@ -51,7 +51,7 @@ export const PRICING_DATA: PricingItem[] = [
         id: "masaz",
         title: "Masáž",
         subtitle: "Martina",
-        timeRange: "30 - 150 min",
+        timeRange: "30 - 50 min",
         iconName: "Waves",
         prices: [
             { label: "30 min", price: "400 Kč" },

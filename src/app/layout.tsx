@@ -92,7 +92,7 @@ export default function RootLayout({
           {children}
           <FloatingLogo />
           <StickMan />
-          <RemedySnack />
+
           <CookieConsent />
         </AnimationProvider>
       </body>
