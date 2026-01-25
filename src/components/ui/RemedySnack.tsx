@@ -72,12 +72,30 @@ export function RemedySnack() {
     };
 
     const showTip = (cat: TipCategory) => {
+        // 1. Determine target type based on probability
+        const rand = Math.random();
+        let targetType: 'tip' | 'vite_ze' | 'motivace' = 'tip';
+        if (rand > 0.4 && rand <= 0.7) targetType = 'vite_ze'; // 30%
+        if (rand > 0.7) targetType = 'motivace'; // 30%
+
+        // 2. Filter tips by category and type
         const categoryTips = REMEDY_TIPS.filter(t => t.category === cat);
-        // Avoid repeating the same tip if possible
-        let nextTip = categoryTips[Math.floor(Math.random() * categoryTips.length)];
-        if (currentTip && categoryTips.length > 1 && nextTip.id === currentTip.id) {
-            nextTip = categoryTips.find(t => t.id !== currentTip.id) || nextTip;
+        let candidates = categoryTips.filter(t => t.type === targetType);
+
+        // Fallback: if no tips of target type exist, use all category tips
+        if (candidates.length === 0) candidates = categoryTips;
+
+        // 3. Select random tip, avoiding immediate repetition
+        let nextTip = candidates[Math.floor(Math.random() * candidates.length)];
+
+        if (currentTip && candidates.length > 1 && nextTip.id === currentTip.id) {
+            // If we picked the same one, try to pick another from the same candidate pool
+            const otherCandidates = candidates.filter(t => t.id !== currentTip.id);
+            if (otherCandidates.length > 0) {
+                nextTip = otherCandidates[Math.floor(Math.random() * otherCandidates.length)];
+            }
         }
+
         setCurrentTip(nextTip);
     };
 
@@ -203,7 +221,8 @@ export function RemedySnack() {
                                     {/* MICRO TIP BLOCK */}
                                     <div className="bg-[#D9F99D]/10 border border-[#D9F99D]/20 rounded-xl p-3 relative">
                                         <div className="absolute -top-3 left-3 bg-[#1a1a1a] px-2 text-[10px] text-[#D9F99D] font-bold uppercase tracking-widest border border-[#D9F99D]/20 rounded-full">
-                                            Tip pro tebe
+                                            {currentTip.type === 'motivace' ? 'Motivace' :
+                                                currentTip.type === 'vite_ze' ? 'Víte, že?' : 'Tip pro tebe'}
                                         </div>
                                         <p className="text-[#D9F99D] text-sm font-medium leading-relaxed">
                                             {currentTip.micro}

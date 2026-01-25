@@ -1,4 +1,5 @@
 export type TipCategory = 'krk_hlava' | 'bedra' | 'rameno_lopatky' | 'stres_regenerace';
+export type TipType = 'tip' | 'vite_ze' | 'motivace';
 
 export interface Tip {
     id: string;
@@ -6,6 +7,7 @@ export interface Tip {
     headline: string;
     body: string;
     micro: string;
+    type: TipType;
 }
 
 export const CATEGORIES: { id: TipCategory; label: string }[] = [
@@ -15,7 +17,14 @@ export const CATEGORIES: { id: TipCategory; label: string }[] = [
     { id: 'stres_regenerace', label: 'Stres / Únava' }
 ];
 
-export const REMEDY_TIPS: Tip[] = [
+// Helper to determine type based on headline
+const getType = (headline: string): TipType => {
+    if (headline.startsWith("Víte, že") || headline.startsWith("Víte, že")) return 'vite_ze';
+    if (headline.startsWith("Motivace:")) return 'motivace';
+    return 'tip';
+};
+
+const RAW_TIPS: Omit<Tip, 'type'>[] = [
     { "id": "K01", "category": "krk_hlava", "headline": "Krk není vždy krk", "body": "Ztuhlý krk často souvisí s mělkým dechem a staženou čelistí.", "micro": "3× nádech do žeber (do stran), při výdechu povol čelist a jazyk." },
     { "id": "K02", "category": "krk_hlava", "headline": "Brada dolů, ne dopředu", "body": "Vysunutá brada umí přetížit šíji rychleji než špatná židle.", "micro": "Zasuň bradu o 2 mm dozadu (bez záklonu), 5 pomalých výdechů." },
     { "id": "K03", "category": "krk_hlava", "headline": "Oči tahají krk", "body": "Dlouhé koukání do blízka často stáhne šíji i čelo.", "micro": "Podívej se 10 s do dálky, pak 10 s jemně krouž očima." },
@@ -141,3 +150,8 @@ export const REMEDY_TIPS: Tip[] = [
     { "id": "S29", "category": "stres_regenerace", "headline": "Motivace: nedělej to dokonale", "body": "Lepší je “trochu často” než “hodně občas”. Tělo to pozná.", "micro": "3×: výdech, ramena dolů, chodidla plně na zemi." },
     { "id": "S30", "category": "stres_regenerace", "headline": "Víte, že světlo ladí rytmus?", "body": "Krátký kontakt s denním světlem pomáhá tělu držet režim dne a noci.", "micro": "3–5 min venku nebo u okna + 5 dlouhých výdechů." }
 ];
+
+export const REMEDY_TIPS: Tip[] = RAW_TIPS.map(tip => ({
+    ...tip,
+    type: getType(tip.headline)
+}));
