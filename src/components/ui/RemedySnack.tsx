@@ -193,16 +193,24 @@ export function RemedySnack() {
                                 </div>
 
                                 <div>
-                                    <div className="flex items-baseline justify-between mb-1">
-                                        <h4 className="text-white font-bold text-lg">{currentTip.headline}</h4>
-                                        <span className="text-[#D9F99D] text-xs font-mono bg-[#D9F99D]/10 px-2 py-0.5 rounded ml-2 whitespace-nowrap">
-                                            {currentTip.duration}
-                                        </span>
+                                    <div className="flex items-baseline justify-between mb-2">
+                                        <h4 className="text-white font-bold text-lg leading-tight">{currentTip.headline}</h4>
                                     </div>
-                                    <p className="text-stone-300 text-sm leading-relaxed">
-                                        {currentTip.description}
+                                    <p className="text-stone-300 text-sm leading-relaxed mb-4">
+                                        {currentTip.body}
                                     </p>
+
+                                    {/* MICRO TIP BLOCK */}
+                                    <div className="bg-[#D9F99D]/10 border border-[#D9F99D]/20 rounded-xl p-3 relative">
+                                        <div className="absolute -top-3 left-3 bg-[#1a1a1a] px-2 text-[10px] text-[#D9F99D] font-bold uppercase tracking-widest border border-[#D9F99D]/20 rounded-full">
+                                            Tip pro tebe
+                                        </div>
+                                        <p className="text-[#D9F99D] text-sm font-medium leading-relaxed">
+                                            {currentTip.micro}
+                                        </p>
+                                    </div>
                                 </div>
+
 
                                 <div className="pt-2 flex flex-col gap-2">
                                     <a
