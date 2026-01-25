@@ -3,10 +3,9 @@ import { Sora, Manrope } from "next/font/google";
 import "./globals.css";
 import { FloatingLogo } from "@/components/layout/FloatingLogo";
 import { StickMan } from "@/components/ui/StickMan";
-import { CapacityAlert } from "@/components/ui/CapacityAlert";
-import { AnimationProvider } from "@/context/AnimationContext";
-
+import { RemedySnack } from "@/components/ui/RemedySnack";
 import { CookieConsent } from "@/components/ui/CookieConsent";
+import { AnimationProvider } from "@/context/AnimationContext";
 
 const sora = Sora({
   variable: "--font-sora",
@@ -92,8 +91,8 @@ export default function RootLayout({
         <AnimationProvider>
           {children}
           <FloatingLogo />
-          <CapacityAlert />
           <StickMan />
+          <RemedySnack />
           <CookieConsent />
         </AnimationProvider>
       </body>
