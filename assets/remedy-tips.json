@@ -1,32 +1,4 @@
-export type TipCategory = 'krk_hlava' | 'bedra' | 'rameno_lopatky' | 'stres_regenerace';
-export type TipType = 'tip' | 'vite_ze' | 'motivace';
-
-export interface Tip {
-    id: string;
-    category: TipCategory;
-    headline: string;
-    body: string;
-    micro: string;
-    type: TipType;
-    tags?: string[];
-}
-
-export const CATEGORIES: { id: TipCategory; label: string }[] = [
-    { id: 'krk_hlava', label: 'Krk / Hlava' },
-    { id: 'bedra', label: 'Bedra' },
-    { id: 'rameno_lopatky', label: 'Ramena / Lopatky' },
-    { id: 'stres_regenerace', label: 'Stres / Únava' }
-];
-
-// Helper to determine type based on headline (or use manual if provided)
-const getType = (headline: string, manualType?: TipType): TipType => {
-    if (manualType) return manualType;
-    if (headline.startsWith("Víte, že") || headline.startsWith("Víte, že")) return 'vite_ze';
-    if (headline.startsWith("Motivace:")) return 'motivace';
-    return 'tip';
-};
-
-const RAW_TIPS: (Omit<Tip, 'type'> & { type?: TipType })[] = [
+[
   {
     "id": "K01",
     "category": "krk_hlava",
@@ -2175,9 +2147,4 @@ const RAW_TIPS: (Omit<Tip, 'type'> & { type?: TipType })[] = [
       "stres"
     ]
   }
-];
-
-export const REMEDY_TIPS: Tip[] = RAW_TIPS.map(tip => ({
-    ...tip,
-    type: getType(tip.headline, tip.type)
-}));
+]
