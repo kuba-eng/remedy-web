@@ -9,7 +9,7 @@ export function About() {
         <section
             id="o-nas"
             className="relative w-full min-h-screen flex items-center bg-fixed bg-center bg-cover bg-no-repeat scroll-mt-20"
-            style={{ backgroundImage: `url('/images/about_bg_new.jpg')` }}
+            style={{ backgroundImage: `url('/images/about_bg_v2.jpg')` }}
         >
             {/* Dark Overlay Gradient for depth */}
             <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/90 via-neutral-950/50 to-transparent pointer-events-none" />

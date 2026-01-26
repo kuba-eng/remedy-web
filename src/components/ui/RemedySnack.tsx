@@ -422,7 +422,7 @@ export function RemedySnack({ initialTipId }: RemedySnackProps) {
                                 ) : currentTip ? (
                                     // STANDARD TIP VIEW
                                     <>
-                                        <div className="flex items-center justify-between">
+                                        <div className="flex items-center justify-between mt-4 md:mt-0 mr-8 md:mr-0">
                                             <div className="flex items-center gap-3">
                                                 <div className="w-2 h-2 rounded-full bg-[#D9F99D] shadow-[0_0_10px_#D9F99D]" />
                                                 <h3 className="text-[#D9F99D] font-bold text-xs tracking-widest uppercase">
