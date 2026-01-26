@@ -14,7 +14,7 @@ export function About() {
             {/* Dark Overlay Gradient for depth */}
             <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/90 via-neutral-950/50 to-transparent pointer-events-none" />
 
-            <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center lg:py-24">
+            <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-24 lg:py-24">
 
                 {/* Text Content in a clean, semi-transparent container */}
                 <motion.div
