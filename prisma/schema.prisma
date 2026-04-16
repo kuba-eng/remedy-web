@@ -1,0 +1,95 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// -----------------------------------------------------------------------------
+// Core Business Entities
+// -----------------------------------------------------------------------------
+
+model Booking {
+  id                String   @id @default(uuid())
+  referenceCode     String   @unique // User-friendly code (e.g. REM-1234)
+  externalId        String?  // ID in Clubspire (if synced)
+  
+  status            String   @default("PENDING") // PENDING, CONFIRMED, CANCELLED, REJECTED
+  
+  serviceId         String
+  serviceName       String   // Snapshot of service name at booking time
+  
+  staffId           String?
+  staffName         String?
+  
+  startAt           DateTime
+  endAt             DateTime
+  durationMinutes   Int
+  
+  customer          Customer @relation(fields: [customerId], references: [id])
+  customerId        String
+  
+  notes             String?
+  
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  auditLogs         AuditLog[]
+
+  @@index([startAt, endAt])
+  @@index([status])
+}
+
+model Customer {
+  id        String    @id @default(uuid())
+  email     String    @unique
+  phone     String
+  firstName String
+  lastName  String
+  
+  externalId String?  // ID in Clubspire
+  
+  bookings  Booking[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// -----------------------------------------------------------------------------
+// Reliability & Sync (Outbox / Idempotency)
+// -----------------------------------------------------------------------------
+
+model OutboxEvent {
+  id          String   @id @default(uuid())
+  type        String   // BOOKING_CREATED, BOOKING_CANCELLED
+  payload     String   // JSON payload
+  status      String   @default("PENDING") // PENDING, PROCESSED, FAILED
+  attempts    Int      @default(0)
+  lastError   String?
+  
+  createdAt   DateTime @default(now())
+  processedAt DateTime?
+}
+
+model IdempotencyKey {
+  key         String   @id
+  response    String?  // Cached response if completed
+  lockedAt    DateTime @default(now())
+  expiresAt   DateTime // Process cleanup
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  booking   Booking? @relation(fields: [bookingId], references: [id])
+  bookingId String?
+  
+  action    String   // STATUS_CHANGE, SYNC_SUCCESS, SYNC_FAIL
+  details   String?
+  
+  createdAt DateTime @default(now())
+}
