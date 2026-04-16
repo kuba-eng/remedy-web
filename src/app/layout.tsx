@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { Sora, Manrope } from "next/font/google";
 import "./globals.css";
+import "./force-styles.css";
 import { FloatingLogo } from "@/components/layout/FloatingLogo";
 import { StickMan } from "@/components/ui/StickMan";
 import { RemedySnack } from "@/components/ui/RemedySnack";
 import { CookieConsent } from "@/components/ui/CookieConsent";
 import { AnimationProvider } from "@/context/AnimationContext";
+import { RemedyChatWidget } from "@/components/ui/RemedyChatWidget";
 
 const sora = Sora({
   variable: "--font-sora",
@@ -80,7 +82,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="cs" className="scroll-smooth">
+    <html lang="cs" className="scroll-smooth" suppressHydrationWarning>
+      <head>
+        <style>{`
+          input, textarea, select { text-transform: none !important; }
+          .normal-case-important { text-transform: none !important; }
+        `}</style>
+      </head>
       <body
         className={`${sora.variable} ${manrope.variable} antialiased font-sans`}
       >
@@ -94,6 +102,7 @@ export default function RootLayout({
           <StickMan />
 
           <CookieConsent />
+          <RemedyChatWidget />
         </AnimationProvider>
       </body>
     </html>
