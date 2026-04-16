@@ -20,9 +20,6 @@ export async function GET(req: Request) {
   };
 
   // Simulace drobné síťové/databázové prodlevy, aby se testovalo reálné prostředí
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(NextResponse.json(mockData));
-    }, 500);
-  });
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  return NextResponse.json(mockData);
 }
