@@ -1,0 +1,17 @@
+@layer base {
+
+    input,
+    textarea,
+    select {
+        text-transform: none !important;
+    }
+
+    /* Explicitly target specific inputs if needed */
+    input[name="login"],
+    input[name="password"],
+    input[name="email"],
+    input[name="firstName"],
+    input[name="lastName"] {
+        text-transform: none !important;
+    }
+}
