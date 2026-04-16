@@ -359,6 +359,15 @@ export async function getVerifiedSlotsText(person: string): Promise<string | nul
                         if (!matchedTab || !matchedTab.objects) return;
 
                         matchedTab.objects.forEach((obj: any) => {
+                            // Filtrování pouze na správného terapeuta, abychom nemíchali Petru/Radima ke Kubovi atd.
+                            const objName = (obj.name || "").toLowerCase();
+                            if (isKuba && !objName.includes("kuba") && !objName.includes("jakub")) {
+                                return;
+                            }
+                            if (!isKuba && !objName.includes("radim")) {
+                                return;
+                            }
+
                             if (obj.hours && Array.isArray(obj.hours)) {
                                 obj.hours.forEach((h: any) => {
                                     if (h.hourDetails && Array.isArray(h.hourDetails)) {
@@ -414,9 +423,15 @@ export async function getVerifiedSlotsText(person: string): Promise<string | nul
                     const yearNum = res.d.getFullYear();
                     const prefix = `${dayName} ${dateNum}. ${monthNum}. ${yearNum}`;
 
+                    const pragueOptions: Intl.DateTimeFormatOptions = { 
+                        hour: '2-digit', 
+                        minute: '2-digit',
+                        timeZone: 'Europe/Prague' 
+                    };
+
                     validBlocks.forEach(b => {
-                        const strStart = new Date(b.start).toLocaleTimeString('cs-CZ', { hour: '2-digit', minute: '2-digit' });
-                        const strEnd = new Date(b.end).toLocaleTimeString('cs-CZ', { hour: '2-digit', minute: '2-digit' });
+                        const strStart = new Date(b.start).toLocaleTimeString('cs-CZ', pragueOptions);
+                        const strEnd = new Date(b.end).toLocaleTimeString('cs-CZ', pragueOptions);
                         dayResults.push(`- ${prefix}, ${strStart} až ${strEnd}`);
                     });
                 }
