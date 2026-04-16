@@ -184,7 +184,7 @@ export function RemedyChatWidget() {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-[90] flex flex-col items-end justify-end md:bottom-8 md:right-8">
+    <div className="fixed bottom-2 right-2 z-[99] flex flex-col items-end justify-end md:bottom-4 md:right-4">
       <AnimatePresence>
         {open && (
           <motion.div
@@ -192,7 +192,7 @@ export function RemedyChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }} 
-            className="mb-4 w-[calc(100vw-3rem)] sm:w-[380px] md:w-[420px] origin-bottom-right overflow-hidden rounded-[28px] border border-white/5 bg-[#0A0A0A] text-white shadow-[0_24px_80px_rgba(0,0,0,0.6)] ring-1 ring-white/10"
+            className="w-[calc(100vw-3rem)] sm:w-[380px] md:w-[420px] origin-bottom-right overflow-hidden rounded-[28px] border border-white/5 bg-[#0A0A0A] text-white shadow-[0_24px_80px_rgba(0,0,0,0.6)] ring-1 ring-white/10"
           >
             {/* Header */}
             <div className="border-b border-white/10 bg-gradient-to-br from-white/[0.04] to-transparent p-5">
@@ -324,41 +324,45 @@ export function RemedyChatWidget() {
       </AnimatePresence>
 
       {/* Floating Launcher Button */}
-      <motion.button
-        type="button"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        onClick={() => setOpen((prev) => !prev)}
-        className="group relative flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full border border-[#D9F99D]/20 bg-[#0A0A0A] text-[#D9F99D] shadow-[0_8px_32px_rgba(217,249,157,0.15)] transition-colors hover:border-[#D9F99D]/50 hover:bg-neutral-900"
-        aria-expanded={open}
-        aria-label="Otevřít Remedy chat"
-      >
-        <div className="absolute inset-0 rounded-full bg-[#D9F99D]/5 blur-md transition-all group-hover:bg-[#D9F99D]/10 group-hover:blur-lg" />
-        
-        <span className="relative z-10 flex text-white group-hover:text-[#D9F99D] transition-colors">
-          {open ? (
-             <X className="h-6 w-6 sm:h-7 sm:w-7" />
-          ) : (
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="sm:h-[28px] sm:w-[28px]"
-            >
-              <path
-                d="M7 17.5L3.5 20V6.5C3.5 5.39543 4.39543 4.5 5.5 4.5H18.5C19.6046 4.5 20.5 5.39543 20.5 6.5V15.5C20.5 16.6046 19.6046 17.5 18.5 17.5H7Z"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinejoin="round"
-              />
-              <path d="M8 9H16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-              <path d="M8 12.5H13.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-          )}
-        </span>
-      </motion.button>
+      <AnimatePresence>
+        {!open && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.2 }}
+            type="button"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setOpen(true)}
+            className="group relative flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full border border-[#D9F99D]/20 bg-[#0A0A0A] text-[#D9F99D] shadow-[0_8px_32px_rgba(217,249,157,0.15)] transition-colors hover:border-[#D9F99D]/50 hover:bg-neutral-900"
+            aria-expanded={open}
+            aria-label="Otevřít Remedy chat"
+          >
+            <div className="absolute inset-0 rounded-full bg-[#D9F99D]/5 blur-md transition-all group-hover:bg-[#D9F99D]/10 group-hover:blur-lg" />
+            
+            <span className="relative z-10 flex text-white group-hover:text-[#D9F99D] transition-colors">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="sm:h-[28px] sm:w-[28px]"
+              >
+                <path
+                  d="M7 17.5L3.5 20V6.5C3.5 5.39543 4.39543 4.5 5.5 4.5H18.5C19.6046 4.5 20.5 5.39543 20.5 6.5V15.5C20.5 16.6046 19.6046 17.5 18.5 17.5H7Z"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinejoin="round"
+                />
+                <path d="M8 9H16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M8 12.5H13.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+            </span>
+          </motion.button>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

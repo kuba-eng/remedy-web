@@ -326,7 +326,7 @@ export function RemedySnack({ initialTipId }: RemedySnackProps) {
                     initial={{ opacity: 0, y: 50, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.9 }}
-                    className="fixed bottom-4 right-4 md:bottom-10 md:right-10 z-[60] w-[90vw] md:w-[380px] pointer-events-auto"
+                    className="fixed bottom-6 right-4 md:bottom-12 md:right-10 z-[60] w-[90vw] md:w-[380px] pointer-events-auto"
                 >
                     <div className="relative overflow-hidden rounded-[24px] bg-[#1a1a1a]/95 backdrop-blur-xl border border-[#D9F99D]/20 shadow-[0_20px_50px_rgba(0,0,0,0.5)] p-6">
 
