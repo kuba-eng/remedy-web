@@ -1,0 +1,1 @@
+cd /opt/openclaw-bridge && REAL_TOKEN=$(jq -r ".gateway.auth.masterToken" /home/openclaw/.openclaw/openclaw.json) && sed -i "s/OPENCLAW_ENGINE_TOKEN=.*/OPENCLAW_ENGINE_TOKEN=$REAL_TOKEN/" .env && pm2 restart openclaw-bridge --update-env
