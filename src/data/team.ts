@@ -2,6 +2,7 @@ export type TeamMember = {
     name: string;
     role: string;
     bio: string;
+    image?: string;
 };
 
 export const TEAM_DATA: TeamMember[] = [
@@ -9,6 +10,7 @@ export const TEAM_DATA: TeamMember[] = [
         name: "Mgr. Jakub Prášil",
         role: "Manuální terapie",
         bio: "Jakub se specializuje na diagnostiku a terapii funkčních poruch pohybového aparátu. Ve své praxi využívá především manuální techniky v kombinaci s cíleným cvičením. Klade důraz na individuální přístup a hledání příčiny potíží.",
+        image: "/images/team/kuba.jpg",
     },
     {
         name: "Mgr. Radim Žídek",

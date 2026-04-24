@@ -5,6 +5,7 @@ import { Section } from "@/components/ui/Section";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { TEAM_DATA } from "@/data/team";
+import Image from "next/image";
 
 export function Team() {
     const [activeMember, setActiveMember] = useState<number | null>(null);
@@ -36,10 +37,18 @@ export function Team() {
                                 activeMember === index ? "w-32 h-32 border-[#D9F99D]" : "w-48 h-48 border-white group-hover:border-[#D9F99D]/50"
                             )}
                         >
-                            {/* Placeholder for Team Member Image */}
-                            <div className="w-full h-full bg-neutral-200 flex items-center justify-center text-neutral-400">
-                                <span className="text-xs">Photo</span>
-                            </div>
+                            {member.image ? (
+                                <Image
+                                    src={member.image}
+                                    alt={member.name}
+                                    fill
+                                    className="object-cover object-[center_20%]"
+                                />
+                            ) : (
+                                <div className="w-full h-full bg-neutral-200/20 flex items-center justify-center text-neutral-400">
+                                    <span className="text-xs">Ubránit</span>
+                                </div>
+                            )}
                         </motion.div>
 
                         <motion.h3 layout className="text-xl font-bold text-primary">{member.name}</motion.h3>
