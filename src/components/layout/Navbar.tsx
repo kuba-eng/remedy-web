@@ -80,7 +80,7 @@ export function Navbar() {
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
                     </Link>
 
-                    <Link href="/rezervace">
+                    <a href="https://rezervace.remedy.cz/" target="_blank" rel="noopener noreferrer">
                         <Button
                             variant="primary"
                             size="sm"
@@ -88,7 +88,7 @@ export function Navbar() {
                         >
                             Rezervace
                         </Button>
-                    </Link>
+                    </a>
                 </div>
 
                 {/* MOBILE TOGGLE (kept separate for mobile view logic) */}
@@ -128,7 +128,7 @@ export function Navbar() {
                         {isLoggedIn ? "Můj Profil" : "Přihlášení / Registrace"}
                     </Link>
 
-                    <Link href="/rezervace" onClick={() => setMobileMenuOpen(false)}>
+                    <a href="https://rezervace.remedy.cz/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)}>
                         <Button
                             variant="primary"
                             fullWidth
@@ -137,7 +137,7 @@ export function Navbar() {
                         >
                             Rezervace Online
                         </Button>
-                    </Link>
+                    </a>
                 </div>
             )}
         </header>

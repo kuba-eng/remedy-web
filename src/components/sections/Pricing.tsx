@@ -31,13 +31,22 @@ export function Pricing() {
 
             <div className="max-w-7xl mx-auto px-4 relative z-10">
                 {/* Hero Header */}
-                <div className="text-center mb-20">
+                <div className="text-center mb-8 md:mb-12">
                     <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight uppercase">
                         Ceník <span className="text-[#D9F99D]">Služeb</span>
                     </h1>
                     <p className="text-xl md:text-2xl text-neutral-400 font-light max-w-2xl mx-auto">
                         Investice do vašeho <span className="text-white font-medium">zdraví</span> a <span className="text-white font-medium">těla</span>.
                     </p>
+                </div>
+
+                {/* Info Pill */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mb-4">
+                    <div className="col-span-full flex justify-start items-end overflow-visible">
+                        <span className="inline-block whitespace-normal md:whitespace-nowrap text-[10px] md:text-xs text-neutral-400/80 font-medium bg-white/5 border border-white/10 py-2 px-6 rounded-full shadow-sm text-left">
+                            Stávající ceník platí do konce května 2026. Od června bude nový – starý už totiž začal vykazovat známky ekonomické únavy.
+                        </span>
+                    </div>
                 </div>
 
                 {/* Grid Container - 4 cols on XL for 8 items */}

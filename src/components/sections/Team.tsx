@@ -14,8 +14,8 @@ export function Team() {
         <Section id="tym" className="bg-secondary/30">
             <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4 uppercase"><span className="text-[#D9F99D]">REMEDY</span> TEAM</h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto">
-                    Jsme tým zkušených odborníků, kteří se neustále vzdělávají, aby vám poskytli tu nejlepší péči.
+                <p className="text-muted-foreground max-w-3xl lg:max-w-4xl mx-auto">
+                    Jsme tým zkušených odborníků, kteří se neustále vzdělávají, aby vám poskytli tu nejlepší&nbsp;péči.
                 </p>
             </div>
 
@@ -38,12 +38,18 @@ export function Team() {
                             )}
                         >
                             {member.image ? (
-                                <Image
-                                    src={member.image}
-                                    alt={member.name}
-                                    fill
-                                    className="object-cover object-[center_20%]"
-                                />
+                                <div 
+                                    className="w-full h-full relative transition-transform duration-300"
+                                    style={{ transform: member.imageTransform || "none" }}
+                                >
+                                    <Image
+                                        src={member.image}
+                                        alt={member.name}
+                                        fill
+                                        className="object-cover"
+                                        style={{ objectPosition: member.imagePosition || "center 30%" }}
+                                    />
+                                </div>
                             ) : (
                                 <div className="w-full h-full bg-neutral-200/20 flex items-center justify-center text-neutral-400">
                                     <span className="text-xs">Ubránit</span>
@@ -60,11 +66,22 @@ export function Team() {
                                     initial={{ opacity: 0, height: 0 }}
                                     animate={{ opacity: 1, height: "auto" }}
                                     exit={{ opacity: 0, height: 0 }}
-                                    className="overflow-hidden w-full"
+                                    className="overflow-hidden w-full flex flex-col items-center"
                                 >
-                                    <p className="text-muted-foreground text-sm mt-2 pb-4 leading-relaxed">
+                                    <p className="text-muted-foreground text-sm mt-2 pb-4 leading-relaxed whitespace-pre-line">
                                         {member.bio}
                                     </p>
+                                    
+                                    {member.reservationLink && (
+                                        <a 
+                                            href={member.reservationLink}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="mt-2 mb-4 bg-[#D9F99D] text-black hover:bg-white px-8 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all hover:scale-105 shadow-[0_0_15px_rgba(217,249,157,0.2)] hover:shadow-[0_0_20px_rgba(255,255,255,0.4)]"
+                                        >
+                                            Objednat se
+                                        </a>
+                                    )}
                                 </motion.div>
                             )}
                         </AnimatePresence>

@@ -9,7 +9,7 @@ export function About() {
         <section
             id="o-nas"
             className="relative w-full min-h-screen flex items-center bg-fixed bg-center bg-cover bg-no-repeat scroll-mt-20"
-            style={{ backgroundImage: `url('/images/about_bg_v2.jpg')` }}
+            style={{ backgroundImage: `url('/images/about_bg_team_v2.png')` }}
         >
             {/* Dark Overlay Gradient for depth */}
             <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/90 via-neutral-950/50 to-transparent pointer-events-none" />
@@ -31,7 +31,7 @@ export function About() {
                         </h2>
                     </div>
 
-                    <div className="space-y-6 text-lg md:text-xl text-neutral-300 font-light leading-relaxed max-w-xl backdrop-blur-sm bg-black/10 p-6 rounded-2xl border border-white/5 shadow-2xl">
+                    <div className="space-y-6 text-lg md:text-xl text-neutral-300 font-light leading-relaxed max-w-xl">
                         <p>
                             Nezáleží nám na tom, jestli jste vrcholový sportovec nebo knihomol. Ať jste malí, velcí, hubení, silní, slabí, mladí nebo staří, bolí vás koleno, nebo celé tělo, chcete skákat dál, nebo výš, nebo prostě jen v PO HO DĚ doběhnout autobus.
                         </p>

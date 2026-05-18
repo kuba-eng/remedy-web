@@ -25,6 +25,8 @@ export function Footer() {
                             <div className="flex flex-col gap-1">
                                 <a href="tel:+420777868636" className="hover:text-black transition-colors">+420 777 868 636 (Kuba)</a>
                                 <a href="tel:+420776274111" className="hover:text-black transition-colors">+420 776 274 111 (Radim)</a>
+                                <a href="tel:+420608314451" className="hover:text-black transition-colors">+420 608 314 451 (Martina)</a>
+                                <a href="tel:+420731312777" className="hover:text-black transition-colors">+420 731 312 777 (Ondra)</a>
                             </div>
                         }
                     />

@@ -26,11 +26,11 @@ export const PRICING_DATA: PricingItem[] = [
         iconName: "Hand",
         highlight: true,
         prices: [
-            { label: "30 min", price: "600 Kč" },
-            { label: "50 min", price: "1 200 Kč" },
-            { label: "80 min", price: "1 700Kč" },
-            { label: "110 min", price: "2 300 Kč" },
-            { label: "150 min", price: "2 900 Kč" },
+            { label: "30 min", price: "550 Kč" },
+            { label: "50 min", price: "1 000 Kč" },
+            { label: "80 min", price: "1 450Kč" },
+            { label: "110 min", price: "1 900 Kč" },
+            { label: "150 min", price: "2 300 Kč" },
         ],
         note: "První návštěva může trvat až 150 min (analýza).",
     },
@@ -42,8 +42,8 @@ export const PRICING_DATA: PricingItem[] = [
         timeRange: "30 - 50 min",
         iconName: "PersonStanding",
         prices: [
-            { label: "30 min", price: "600 Kč" },
-            { label: "50 min", price: "1 200 Kč" },
+            { label: "30 min", price: "550 Kč" },
+            { label: "50 min", price: "1 000 Kč" },
         ],
     },
     // 3. Masáž (Waves - New Item)
@@ -79,7 +79,7 @@ export const PRICING_DATA: PricingItem[] = [
         timeRange: "55 min",
         iconName: "User",
         prices: [
-            { label: "55 min", price: "800 Kč" },
+            { label: "55 min", price: "750 Kč" },
 
         ],
     },
@@ -91,7 +91,7 @@ export const PRICING_DATA: PricingItem[] = [
         timeRange: "55 min",
         iconName: "Users",
         prices: [
-            { label: "55 min", price: "1 000 Kč" },
+            { label: "55 min", price: "900 Kč" },
         ],
     },
     // 7. Kinesiotaping (Bandage)
@@ -116,7 +116,7 @@ export const PRICING_DATA: PricingItem[] = [
         timeRange: "15 min",
         iconName: "Scale",
         prices: [
-            { label: "1x analýza ", price: "500 Kč" },
+            { label: "1x analýza ", price: "400 Kč" },
         ],
     },
 ];
