@@ -32,7 +32,7 @@ export function Pricing() {
             <div className="max-w-7xl mx-auto px-4 relative z-10">
                 {/* Hero Header */}
                 <div className="text-center mb-8 md:mb-12">
-                    <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight uppercase">
+                    <h1 className="text-3xl md:text-5xl font-bold mb-6 tracking-tight uppercase">
                         Ceník <span className="text-[#D9F99D]">Služeb</span>
                     </h1>
                     <p className="text-xl md:text-2xl text-neutral-400 font-light max-w-2xl mx-auto">

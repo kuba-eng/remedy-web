@@ -15,7 +15,7 @@ export function Contact() {
             <div className="max-w-7xl mx-auto px-4 relative z-10 w-full">
                 {/* Heading */}
                 <div className="flex flex-col items-center text-center">
-                    <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tight">
+                    <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tight">
                         Kontaktujte <span className="text-[#D9F99D]">Nás</span>
                     </h2>
                 </div>

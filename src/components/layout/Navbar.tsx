@@ -7,21 +7,11 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 
-import { checkSession } from "@/actions/auth";
-
 
 export function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const pathname = usePathname();
-
-    useEffect(() => {
-        checkSession().then(isAuth => {
-            console.log("Navbar checkSession result:", isAuth);
-            setIsLoggedIn(isAuth);
-        });
-    }, [pathname]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -76,10 +66,6 @@ export function Navbar() {
                         ))}
                     </nav>
 
-                    <Link href={isLoggedIn ? "/profil" : "/login"} className="text-white/70 hover:text-[#D9F99D] transition-colors p-2" title={isLoggedIn ? "Můj Profil" : "Přihlášení"}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
-                    </Link>
-
                     <a href="https://rezervace.remedy.cz/" target="_blank" rel="noopener noreferrer">
                         <Button
                             variant="primary"
@@ -93,9 +79,6 @@ export function Navbar() {
 
                 {/* MOBILE TOGGLE (kept separate for mobile view logic) */}
                 <div className="flex md:hidden items-center gap-4">
-                    <Link href={isLoggedIn ? "/profil" : "/login"} className="text-white/70 hover:text-[#D9F99D] transition-colors p-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
-                    </Link>
                     <button
                         className="p-2 text-white"
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -118,15 +101,6 @@ export function Navbar() {
                             {link.name}
                         </Link>
                     ))}
-
-                    <Link
-                        href={isLoggedIn ? "/profil" : "/login"}
-                        className="text-lg font-medium py-2 text-white/70 hover:text-[#D9F99D] flex items-center gap-3"
-                        onClick={() => setMobileMenuOpen(false)}
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
-                        {isLoggedIn ? "Můj Profil" : "Přihlášení / Registrace"}
-                    </Link>
 
                     <a href="https://rezervace.remedy.cz/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)}>
                         <Button

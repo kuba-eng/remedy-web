@@ -104,8 +104,8 @@ export function Services() {
             )}>
 
                 {/* Heading */}
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-10 uppercase tracking-wide">
-                    Naše služby
+                <h2 className="text-3xl md:text-5xl font-bold text-white mb-10 uppercase tracking-tight">
+                    Naše <span className="text-[#D9F99D]">Služby</span>
                 </h2>
 
                 {/* Carousel */}

@@ -55,8 +55,8 @@ export function Reviews() {
                             ))}
                         </div>
                     </div>
-                    <h2 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tight">
-                        Co o nás <span className="text-[#D9F99D]">Říkají</span>
+                    <h2 className="text-3xl md:text-5xl font-bold uppercase text-white tracking-tight">
+                        Co o nás <span className="text-[#D9F99D]">řekli</span>
                     </h2>
                 </div>
 

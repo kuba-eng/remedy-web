@@ -13,8 +13,8 @@ export function Team() {
     return (
         <Section id="tym" className="bg-secondary/30">
             <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4 uppercase"><span className="text-[#D9F99D]">REMEDY</span> TEAM</h2>
-                <p className="text-muted-foreground max-w-3xl lg:max-w-4xl mx-auto">
+                <h2 className="text-3xl md:text-5xl font-bold text-primary mb-6 uppercase tracking-tight"><span className="text-[#D9F99D]">REMEDY</span> TEAM</h2>
+                <p className="text-xl md:text-2xl text-neutral-400 font-light max-w-2xl mx-auto">
                     Jsme tým zkušených odborníků, kteří se neustále vzdělávají, aby vám poskytli tu nejlepší&nbsp;péči.
                 </p>
             </div>

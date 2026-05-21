@@ -26,7 +26,7 @@ export function About() {
                 >
                     <div className="space-y-4">
                         {/* BADGE REMOVED HERE */}
-                        <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-white">
+                        <h2 className="text-3xl md:text-5xl font-bold uppercase tracking-tight text-white">
                             Vítejte v <span className="text-[#D9F99D]">Remedy</span>.
                         </h2>
                     </div>
