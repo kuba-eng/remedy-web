@@ -40,8 +40,9 @@ export async function GET(req: NextRequest) {
                             <div style={{ width: 24, height: 24, borderRadius: '50%', background: '#D9F99D', marginRight: 20 }} />
                             <div style={{ fontSize: 36, letterSpacing: '8px', color: '#D9F99D', textTransform: 'uppercase', fontWeight: 900 }}>REMEDY</div>
                         </div>
-                        <div style={{ fontSize: 90, fontWeight: 900, color: 'white', letterSpacing: '-2px', lineHeight: 1.1, marginBottom: 40 }}>
-                            FYZIOTERAPIE<br/>A MANUÁLNÍ TERAPIE
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', fontSize: 90, fontWeight: 900, color: 'white', letterSpacing: '-2px', lineHeight: 1.1, marginBottom: 40 }}>
+                            <div>FYZIOTERAPIE</div>
+                            <div>A MANUÁLNÍ TERAPIE</div>
                         </div>
                         <div style={{ fontSize: 32, color: '#a3a3a3', fontWeight: 300, letterSpacing: '1px' }}>
                             Prémiová péče o vaše tělo ve Žďáru nad Sázavou
