@@ -27,21 +27,6 @@ export async function GET(req: NextRequest) {
                         position: 'relative',
                     }}
                 >
-                    {/* Glow Effects */}
-                    <div
-                        style={{
-                            position: 'absolute',
-                            top: '-300px',
-                            right: '-200px',
-                            width: '800px',
-                            height: '800px',
-                            borderRadius: '50%',
-                            background: '#D9F99D',
-                            filter: 'blur(200px)',
-                            opacity: 0.15,
-                        }}
-                    />
-                    
                     <div
                         style={{
                             display: 'flex',
@@ -49,11 +34,10 @@ export async function GET(req: NextRequest) {
                             alignItems: 'center',
                             justifyContent: 'center',
                             textAlign: 'center',
-                            zIndex: 10,
                         }}
                     >
                         <div style={{ display: 'flex', alignItems: 'center', marginBottom: 40 }}>
-                            <div style={{ width: 24, height: 24, borderRadius: '50%', background: '#D9F99D', marginRight: 20, boxShadow: '0 0 30px #D9F99D' }} />
+                            <div style={{ width: 24, height: 24, borderRadius: '50%', background: '#D9F99D', marginRight: 20 }} />
                             <div style={{ fontSize: 36, letterSpacing: '8px', color: '#D9F99D', textTransform: 'uppercase', fontWeight: 900 }}>REMEDY</div>
                         </div>
                         <div style={{ fontSize: 90, fontWeight: 900, color: 'white', letterSpacing: '-2px', lineHeight: 1.1, marginBottom: 40 }}>
@@ -88,34 +72,6 @@ export async function GET(req: NextRequest) {
                     position: 'relative',
                 }}
             >
-                {/* Glow Effects */}
-                <div
-                    style={{
-                        position: 'absolute',
-                        top: '-200px',
-                        right: '-200px',
-                        width: '600px',
-                        height: '600px',
-                        borderRadius: '50%',
-                        background: '#D9F99D',
-                        filter: 'blur(150px)',
-                        opacity: 0.2,
-                    }}
-                />
-                <div
-                    style={{
-                        position: 'absolute',
-                        bottom: '-200px',
-                        left: '-200px',
-                        width: '600px',
-                        height: '600px',
-                        borderRadius: '50%',
-                        background: '#D9F99D',
-                        filter: 'blur(150px)',
-                        opacity: 0.1,
-                    }}
-                />
-
                 {/* Content Container */}
                 <div
                     style={{
@@ -129,7 +85,7 @@ export async function GET(req: NextRequest) {
                 >
                     {/* Logo / Brand */}
                     <div style={{ display: 'flex', alignItems: 'center', marginBottom: 40 }}>
-                        <div style={{ width: 16, height: 16, borderRadius: '50%', background: '#D9F99D', marginRight: 15, boxShadow: '0 0 20px #D9F99D' }} />
+                        <div style={{ width: 16, height: 16, borderRadius: '50%', background: '#D9F99D', marginRight: 15 }} />
                         <div style={{ fontSize: 24, letterSpacing: '4px', color: '#D9F99D', textTransform: 'uppercase', fontWeight: 900 }}>REMEDY FYZIO</div>
                     </div>
 
@@ -146,6 +102,7 @@ export async function GET(req: NextRequest) {
                             padding: '10px 20px',
                             borderRadius: '50px',
                             border: '1px solid #333',
+                            display: 'flex',
                         }}
                     >
                         {tip.category.replace('_', ' ')}
@@ -159,7 +116,6 @@ export async function GET(req: NextRequest) {
                             color: 'white',
                             lineHeight: 1.1,
                             marginBottom: 30,
-                            textShadow: '0 10px 30px rgba(0,0,0,0.5)',
                         }}
                     >
                         {tip.headline}
@@ -184,8 +140,10 @@ export async function GET(req: NextRequest) {
                     style={{
                         position: 'absolute',
                         bottom: 50,
+                        display: 'flex',
                         width: '100%',
-                        textAlign: 'center',
+                        justifyContent: 'center',
+                        alignItems: 'center',
                         fontSize: 20,
                         color: '#444',
                         letterSpacing: '2px',
