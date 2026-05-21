@@ -21,11 +21,48 @@ export async function GET(req: NextRequest) {
                         flexDirection: 'column',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        backgroundColor: '#0a0a0a',
-                        color: 'white',
+                        backgroundColor: '#0a0a0a', // Dark background
+                        padding: '40px 80px',
+                        fontFamily: 'sans-serif',
+                        position: 'relative',
                     }}
                 >
-                    <div style={{ fontSize: 60, fontWeight: 'bold', color: '#D9F99D' }}>REMEDY</div>
+                    {/* Glow Effects */}
+                    <div
+                        style={{
+                            position: 'absolute',
+                            top: '-300px',
+                            right: '-200px',
+                            width: '800px',
+                            height: '800px',
+                            borderRadius: '50%',
+                            background: '#D9F99D',
+                            filter: 'blur(200px)',
+                            opacity: 0.15,
+                        }}
+                    />
+                    
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            textAlign: 'center',
+                            zIndex: 10,
+                        }}
+                    >
+                        <div style={{ display: 'flex', alignItems: 'center', marginBottom: 40 }}>
+                            <div style={{ width: 24, height: 24, borderRadius: '50%', background: '#D9F99D', marginRight: 20, boxShadow: '0 0 30px #D9F99D' }} />
+                            <div style={{ fontSize: 36, letterSpacing: '8px', color: '#D9F99D', textTransform: 'uppercase', fontWeight: 900 }}>REMEDY</div>
+                        </div>
+                        <div style={{ fontSize: 90, fontWeight: 900, color: 'white', letterSpacing: '-2px', lineHeight: 1.1, marginBottom: 40 }}>
+                            FYZIOTERAPIE<br/>A MANUÁLNÍ TERAPIE
+                        </div>
+                        <div style={{ fontSize: 32, color: '#a3a3a3', fontWeight: 300, letterSpacing: '1px' }}>
+                            Prémiová péče o vaše tělo ve Žďáru nad Sázavou
+                        </div>
+                    </div>
                 </div>
             ),
             {

@@ -57,6 +57,7 @@ const jsonLd = {
 }
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.remedy.cz"),
   title: "REMEDY | Fyzioterapie a manuální terapie",
   description: "Prémiová péče o vaše tělo. Fyzioterapie, masáže, cvičení a prevence. Individuální přístup a moderní metody pro vaše zdraví.",
   keywords: ["fyzioterapie", "masáže", "manuální terapie", "rehabilitace", "kinesiotaping", "zdravotní cvičení", "Žďár nad Sázavou", "Remedy"],
@@ -64,15 +65,24 @@ export const metadata: Metadata = {
   openGraph: {
     title: "REMEDY | Fyzioterapie a manuální terapie",
     description: "Prémiová péče o vaše tělo. Fyzioterapie, masáže, cvičení a prevence.",
-    url: "https://remedy-web.vercel.app",
+    url: "https://www.remedy.cz",
     siteName: "Remedy Medical Fitness",
     locale: "cs_CZ",
     type: "website",
+    images: [
+      {
+        url: "/api/og",
+        width: 1200,
+        height: 630,
+        alt: "REMEDY | Fyzioterapie a manuální terapie",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "REMEDY | Fyzioterapie a manuální terapie",
     description: "Prémiová péče o vaše tělo. Fyzioterapie, masáže, cvičení a prevence.",
+    images: ["/api/og"],
   },
 };
 
