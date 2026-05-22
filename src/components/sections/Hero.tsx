@@ -8,9 +8,9 @@ export function Hero() {
             id="hero"
             bgImage="/images/bg-hero-custom.jpg"
             title={
-                <>
+                <div className="mt-32 md:mt-0">
                     Život je <span className="text-[#D9F99D]">pohyb</span>.
-                </>
+                </div>
             }
             description={
                 <span className="text-xl md:text-3xl lg:text-4xl font-bold block leading-tight mt-2 opacity-90">
