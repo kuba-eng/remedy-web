@@ -21,7 +21,7 @@ export const TEAM_DATA: TeamMember[] = [
     {
         name: "Mgr. Radim Žídek",
         role: "Fyzioterapie",
-        bio: "Radim je fyzioterapeut. Věří, že pohyb je život – stejně jako spánek, jídlo a dobrá společnost. Říká se, že pohybem ke zdraví, a právě od toho je tady: aby lidem pomohl zvládnout vše v jednom kuse.\n\nMá rád aktivní život a činí mu radost vidět klienty, jak se vracejí do formy – nebo alespoň k bezbolestnému zavazování tkaniček. Nesnaží se být expertem jen na „levé koleno“, baví ho řešit tělo komplexně a bez škatulek. Ve své ordinaci nekádruje a vítá každého, kdo má zájem.\n\nNemá úzce vymezenou specializaci, protože ho baví rozmanitost lidských diagnóz. Ať už jde o vrcholového sportovce, gaučového povaleče, těhotnou ženu, člověka s neurologickou diagnózou nebo někoho po operaci či úrazu, u Radima jsou dveře otevřené všem.",
+        bio: "Radim je fyzioterapeut. Věří, že pohyb je život – stejně jako spánek, jídlo a dobrá společnost. Říká se, že pohybem ke zdraví, a právě od toho je tady: aby lidem pomohl zvládnout vše v jednom kuse.\n\nMá rád aktivní život a činí mu Ráďost vidět klienty, jak se vracejí do formy – nebo alespoň k bezbolestnému zavazování tkaniček. Nesnaží se být expertem jen na „levé koleno“, baví ho řešit tělo komplexně a bez škatulek. Ve své ordinaci nekádruje a vítá každého, kdo má zájem.\n\nNemá úzce vymezenou specializaci, protože ho baví rozmanitost lidských diagnóz. Ať už jde o vrcholového sportovce, gaučového povaleče, těhotnou ženu, člověka s neurologickou diagnózou nebo někoho po operaci či úrazu, u Radima jsou dveře otevřené všem.",
         image: "/images/team/radim.jpg",
         imagePosition: "center 0%",
         imageTransform: "scale(1.1)",
