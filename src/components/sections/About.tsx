@@ -39,7 +39,7 @@ export function About() {
                             Pokud opravdu něco chcete změnit, stačí přestat hledat výmluvy a my vám ukážeme jak na to.
                         </p>
                         <p>
-                            Remedy v současné době pravidelně navštěvuje více než 1&nbsp;200 klientů z celé České republiky, kteří se začli aktivně podílet na příběhu svého života. A jaký je ten váš? <strong className="text-white font-medium">Je čas na změnu!</strong>
+                            Remedy v současné době pravidelně navštěvuje více než 1&nbsp;200 klientů z celé České republiky, kteří se začali aktivně podílet na příběhu svého života. A jaký je ten váš? <strong className="text-white font-medium">Je čas na změnu!</strong>
                         </p>
                         <p>
                             Zázraky na počkání neděláme. Zato děláme plán, který funguje: <span className="text-white">zdravotní cvičení, fyzioterapii a masáže</span>. Hledáme příčinu, řešíme souvislosti a držíme směr.
