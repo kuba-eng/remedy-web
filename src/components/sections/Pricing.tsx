@@ -44,7 +44,7 @@ export function Pricing() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mb-4">
                     <div className="col-span-full flex justify-start items-end overflow-visible">
                         <span className="inline-block whitespace-normal md:whitespace-nowrap text-[10px] md:text-xs text-neutral-400/80 font-medium bg-white/5 border border-white/10 py-2 px-6 rounded-full shadow-sm text-left">
-                            Stávající ceník platí do konce května 2026. Od června bude nový – starý už totiž začal vykazovat známky ekonomické únavy.
+                            Od 1. 6. 2026 platí nový ceník. Ten původní nám dlouho věrně sloužil, ale poslední dobou už spíš silou vůle než rozpočtem.
                         </span>
                     </div>
                 </div>
