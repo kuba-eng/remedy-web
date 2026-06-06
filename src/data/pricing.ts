@@ -30,7 +30,7 @@ export const PRICING_DATA: PricingItem[] = [
             { label: "50 min", price: "1 300 Kč" },
             { label: "80 min", price: "2 000 Kč" },
             { label: "110 min", price: "2 500 Kč" },
-            { label: "150 min", price: "3 000 Kč" },
+            { label: "150 min", price: "3 200 Kč" },
         ],
         note: "První návštěva je komplexnější a může trvat až 150 minut. Zahrnuje vstupní analýzu, terapii a doporučení dalšího postupu.",
     },

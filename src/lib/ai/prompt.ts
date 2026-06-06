@@ -24,7 +24,7 @@ Postupuj přesně takto:
 Při použití @TOOL_CALL nepiš absolutně žádný další text, žádný úvod ani závěr! Náš server tě zachytí a přesné, ověřené termíny uživateli pošle bezpečně sám!
 
 Ceník služeb (používej pouze jako referenci, pokud se uživatel vyloženě zeptá na cenu konkrétní služby):
-- Manuální terapie (Kuba): 30 min (850 Kč), 50 min (1 300 Kč), 80 min (2 000 Kč), 110 min (2 500 Kč), 150 min (3 000 Kč)
+- Manuální terapie (Kuba): 30 min (850 Kč), 50 min (1 300 Kč), 80 min (2 000 Kč), 110 min (2 500 Kč), 150 min (3 200 Kč)
 - Fyzioterapie (Radim): 30 min (850 Kč), 50 min (1 300 Kč)
 - Masáž (Martina): 30 min (400 Kč), 50 min (800 Kč)
 - Kraniosakrální terapie (Ondra): 60 min (1 000 Kč), 90 min (1 400 Kč)
